@@ -65,16 +65,16 @@ jobs:
           path: ./public
       # Deployment to person server
       - name: Deployment to person server
-        uses: easingthemes/ssh-deploy@v2.1.1
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          ARGS: "-avzr --delete" 
-          SOURCE: "public/"
-          REMOTE_HOST: ${{ vars.HOST }}
-          REMOTE_USER: ${{ vars.USER }}
-          TARGET: ${{ vars.PATH }}
-          SCRIPT_BEFORE: |
-            ssh-keyscan
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: ${{ secrets.FTP_USERNAME }}
+            server: ${{ secrets.FTP_SERVER }}
+            port: ${{ secrets.FTP_PORT }}
+            local_path: './static/*'
+            remote_path: '/var/www/app'
+            sftp_only: true
+            password: ${{ secrets.FTP_PASSWORD }}
+            delete_remote_files: true
 
   # Deployment job
   deploy:
