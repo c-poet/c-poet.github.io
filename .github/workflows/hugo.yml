@@ -69,9 +69,9 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           ARGS: "-avzr --delete" 
           SOURCE: "./public/"
-          REMOTE_HOST: ${{ variables.HOST }}
-          REMOTE_USER: ${{ variables.USER }}
-          TARGET: ${{ variables.PATH }}
+          REMOTE_HOST: ${{ vars.HOST }}
+          REMOTE_USER: ${{ vars.USER }}
+          TARGET: ${{ vars.PATH }}
 
   # Deployment job
   deploy:
