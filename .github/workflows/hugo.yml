@@ -67,8 +67,8 @@ jobs:
       - name: Deployment to person server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          ssh_private_key: ${{ secrets.PRIVATE_KEY }}
           username: ${{ vars.USER }}
+          password: ${{ secrets.PASSWORD }}
           server: ${{ vars.HOST }}
           local_path: './public/*'
           remote_path: ${{ vars.PATH }}
