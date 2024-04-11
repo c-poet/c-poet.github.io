@@ -66,10 +66,10 @@ jobs:
       # Deployment to person server
       - name: Deployment to person server
         uses: easingthemes/ssh-deploy@v2.1.1
-        env:
+        with:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           ARGS: "-avzr --delete" 
-          SOURCE: "./public/"
+          SOURCE: "public/"
           REMOTE_HOST: ${{ vars.HOST }}
           REMOTE_USER: ${{ vars.USER }}
           TARGET: ${{ vars.PATH }}
