@@ -64,7 +64,8 @@ jobs:
       # Deployment to person server
       - name: Deployment to person server
         uses: easingthemes/ssh-deploy@v2.1.1
-        environment: person-server
+        environment:
+          name: person-server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           ARGS: "-avzr --delete" 
