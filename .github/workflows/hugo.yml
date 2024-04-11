@@ -73,6 +73,8 @@ jobs:
           REMOTE_HOST: ${{ vars.HOST }}
           REMOTE_USER: ${{ vars.USER }}
           TARGET: ${{ vars.PATH }}
+          SCRIPT_BEFORE: |
+            ssh-keyscan
 
   # Deployment job
   deploy:
