@@ -67,12 +67,12 @@ jobs:
       - name: Deployment to person server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: ${{ vars.USER }}
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
-          server: ${{ vars.HOST }}
           local_path: './public/*'
           remote_path: ${{ vars.PATH }}
-          sftp_only: true
+          sftp_only: false
           delete_remote_files: true
 
   # Deployment job
