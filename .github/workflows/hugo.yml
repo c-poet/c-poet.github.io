@@ -61,6 +61,17 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
+      # Deployment to person server
+      - name: Deployment to person server
+        uses: easingthemes/ssh-deploy@v2.1.1
+        environment: person-server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          ARGS: "-avzr --delete" 
+          SOURCE: "./public/"
+          REMOTE_HOST: ${{ variables.HOST }}
+          REMOTE_USER: ${{ variables.USER }}
+          TARGET: ${{ variables.PATH }}
 
   # Deployment job
   deploy:
