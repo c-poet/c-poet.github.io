@@ -29,6 +29,8 @@ defaults:
 jobs:
   # Build job
   build:
+    environment:
+      name: person-server
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.124.1
@@ -64,8 +66,6 @@ jobs:
       # Deployment to person server
       - name: Deployment to person server
         uses: easingthemes/ssh-deploy@v2.1.1
-        environment:
-          name: person-server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           ARGS: "-avzr --delete" 
