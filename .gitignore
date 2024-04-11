@@ -1,2 +1,4 @@
+# 过滤public目录,由github action构建
+public
 resources
 .hugo_build.lock
