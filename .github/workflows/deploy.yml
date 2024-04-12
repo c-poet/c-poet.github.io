@@ -11,7 +11,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -62,6 +62,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: public
+          force: true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
