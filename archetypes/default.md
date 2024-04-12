@@ -8,11 +8,8 @@ author: "CPoet"
 authorLink: "https://www.cpoet.cn"
 description: ""
 images: []
+featuredImage: ""
 
 tags: []
 categories: []
-
-twemoji: false
-lightgallery: true
-hiddenFromHomePage: false
 ---

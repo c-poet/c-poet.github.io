@@ -1,29 +1,27 @@
 ---
 weight: 0
 title: "银行管理系统实例(C语言版）"
-date: 2024-04-11T23:56:01+08:00
+date: 2023-08-11T23:56:01+08:00
 lastmod: 2024-04-11T23:56:01+08:00
 draft: false
 author: "CPoet"
 authorLink: "https://www.cpoet.cn"
 description: "C语言实现银行管理系统"
 images: []
-resources:
-- name: "application"
-  src: "application.png"
+featuredImagePreview: screenshot.png
 
 tags: ["C语言", "系统"]
 categories: ["编码语言"]
-
-twemoji: false
-lightgallery: true
-hiddenFromHomePage: false
 ---
 
-> 在上小学期的时间里，用C语言简单的写了一个银行的管理系统实例，整体上还是显得有些粗糙。但是对于初学者来说，可以作为一些参考。程序的编写环境是VS2013，为了能让学校运行，所以在DEVC++中进行了测试。由于在编写的时候在循环体中加入了局部变量，所以在VC++中是不能被编译的，如果有需要的同学可以自行修改。
+{{< admonition title="来点废话" >}}
+在上小学期的时间里，用C语言简单的写了一个银行的管理系统实例，整体上还是显得有些粗糙。但是对于初学者来说，可以作为一些参考。程序的编写环境是VS2013，为了能让学校运行，所以在DEVC++中进行了测试。由于在编写的时候在循环体中加入了局部变量，所以在VC++中是不能被编译的，如果有需要的同学可以自行修改。
+{{< /admonition >}}
 
 ## 应用代码
+
 1/全局头文件(banksystem.h)
+
 ```c
 /*
 **banksystem文件头
@@ -769,7 +767,7 @@ void face_2(){
 ```
 
 ## 效果图
-![](application.png)
+![](screenshot.png "程序截图")
 
 ## 下载地址
 DEVC++下测试工程文件（源代码）：[https://download.csdn.net/download/qq_42304721/10592413](https://download.csdn.net/download/qq_42304721/10592413)

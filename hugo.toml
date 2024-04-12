@@ -134,8 +134,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       name = "BY CPoet"
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-      # pre = "<i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i>"
-      pre = ""
+      pre = "<i class='far fa-terminal fa-solid' aria-hidden='true'></i>"
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
@@ -161,7 +160,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     author = true
     # site creation time
     # 网站创立年份
-    since = 2023
+    since = 2022
     # ICP info only in China (HTML format is supported)
     # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
     icp = ""
