@@ -62,7 +62,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: public
-          force: true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
