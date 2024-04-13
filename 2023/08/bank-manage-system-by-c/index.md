@@ -7,7 +7,7 @@
 
 ## 应用代码
 
-1/全局头文件(banksystem.h)
+### 1. 全局头文件(banksystem.h)
 
 ```c
 /*
@@ -41,7 +41,7 @@ typedef struct{
 ```
 
 
-2/入口文件（main.cpp）
+### 2. 入口文件（main.cpp）
 
 ```c
 /*
@@ -77,7 +77,7 @@ int main(){
 }
 ```
 
-3/功能函数文件（function.cpp）
+### 3. 功能函数文件（function.cpp）
 
 ```c
 /*
@@ -614,7 +614,7 @@ void data_i(user *p){
 }
 ```
 
-4/数据操作文件（datalink.cpp）
+### 4. 数据操作文件（datalink.cpp）
 
 ```c
 /*
@@ -657,7 +657,7 @@ void file_read(user *p){
 }
 ```
 
-5/界面文件（interface.cpp）
+### 5. 界面文件（interface.cpp）
 
 ```c
 /*
