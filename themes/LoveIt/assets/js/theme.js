@@ -1093,3 +1093,9 @@ if (document.readyState !== 'loading') {
 } else {
   document.addEventListener('DOMContentLoaded', themeInit, false);
 }
+
+// gitalk decode base64
+if (typeof(config.comment) != 'undefined' && typeof(config.comment.gitalk) != 'undefined') {
+  config.comment.gitalk.clientID=atob(config.comment.gitalk.clientID);
+  config.comment.gitalk.clientSecret=atob(config.comment.gitalk.clientSecret);
+}
