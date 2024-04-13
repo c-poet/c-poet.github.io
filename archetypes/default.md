@@ -7,7 +7,6 @@ draft: true
 author: "CPoet"
 authorLink: "https://www.cpoet.cn"
 description: ""
-images: []
 featuredImage: ""
 
 tags: []
