@@ -499,8 +499,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         enable = true
         owner = "c-poet"
         repo = "c-poet.github.io"
-        clientId = "67fcd9e5d8b5a1b3e013"
-        clientSecret = "2d0750db1df888867a324d848d5e39f78c360f0b"
+        clientId = "NjdmY2Q5ZTVkOGI1YTFiM2UwMTM="
+        clientSecret = "MmQwNzUwZGIxZGY4ODg4NjdhMzI0ZDg0OGQ1ZTM5Zjc4YzM2MGYwYg=="
       # Valine comment config (https://github.com/xCss/Valine)
       # Valine 评论系统设置 (https://github.com/xCss/Valine)
       [params.page.comment.valine]
