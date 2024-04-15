@@ -222,7 +222,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     enable = true
     # type of search engine ["lunr", "algolia"]
     # 搜索引擎的类型 ["lunr", "algolia"]
-    type = "algolia"
+    type = "lunr"
     # max index length of the chunked content
     # 文章内容最长索引长度
     contentLength = 4000
@@ -870,8 +870,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         absoluteURL = false
         [languages.en.params.search.algolia]
           index = "index.en"
-          appID = "5LBV7LNV2C"
-          searchKey = "0f8a672ffcbaec9ab181813599042c8d"
+          appID = ""
+          searchKey = ""
       [languages.en.params.home]
         rss = 10
         [languages.en.params.home.profile]
@@ -979,8 +979,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         absoluteURL = false
         [languages.zh-cn.params.search.algolia]
           index = "index.zh-cn"
-          appID = "5LBV7LNV2C"
-          searchKey = "0f8a672ffcbaec9ab181813599042c8d"
+          appID = ""
+          searchKey = ""
       [languages.zh-cn.params.home]
         rss = 10
         [languages.zh-cn.params.home.profile]
