@@ -15,7 +15,7 @@
 java -jar client-1.0-SNAPSHOT.jar
 ```
 
-![](./start-application.png '启用应用程序')
+![](./start-application.png "启用应用程序")
 
 2. 删除jar包
 
@@ -65,7 +65,7 @@ ls -lh
 
 ## Sheel脚本（批量恢复）
 
-> 由于环境涉及的应用较多，我编写了恢复shell脚本，可以恢复目标目录的文件。
+> 由于环境涉及的应用较多，我编写了恢复shell脚本，可以恢复整个目录中的执行文件。
 
 ```shell
 for pid in $(ps aux | grep java | awk '{ print $2 }'); do
