@@ -1,14 +1,11 @@
----
-weight: 0
-title: "{{ replace .File.ContentBaseName "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
-draft: true
-author: "CPoet"
-authorLink: "https://www.cpoet.cn"
-description: ""
-featuredImage: ""
-
-tags: []
-categories: []
----
++++
+draft = true
+author = "CPoet"
+title = "{{ replace .File.ContentBaseName "-" " " | title }}"
+date = "{{ .Date }}"
+description = ""
+tags = []
+categories = [
+    "mixeds",
+]
++++
