@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ubuntu on CPoet</title><link>https://c-poet.github.io/tags/ubuntu/</link><description>Recent content in Ubuntu on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Sat, 10 Oct 2020 22:33:37 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu安装i3wm（i3窗口管理器）</title><link>https://c-poet.github.io/post/linux/ubuntu-install-i3wm/</link><pubDate>Sat, 10 Oct 2020 22:33:37 +0800</pubDate><guid>https://c-poet.github.io/post/linux/ubuntu-install-i3wm/</guid><description>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359.png" alt="Featured image of post Ubuntu安装i3wm（i3窗口管理器）" />&lt;h2 id="步骤">步骤
+&lt;/h2>&lt;ol>
+&lt;li>添加最新稳定版的i3wm软件源信息&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010204932107.png"
+width="1630"
+height="276"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010204932107_hu2f990b8b58443aea3cdf53ebc90cbe03_163065_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010204932107_hu2f990b8b58443aea3cdf53ebc90cbe03_163065_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="590"
+data-flex-basis="1417px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">~$ su -
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~# /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~# dpkg -i ./keyring.deb
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~# &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;deb https://debian.sur5r.net/i3/ &lt;/span>&lt;span class="k">$(&lt;/span>grep &lt;span class="s1">&amp;#39;^DISTRIB_CODENAME=&amp;#39;&lt;/span> /etc/lsb-release &lt;span class="p">|&lt;/span> cut -f2 -d&lt;span class="o">=&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2"> universe&amp;#34;&lt;/span> &amp;gt;&amp;gt; /etc/apt/sources.list.d/sur5r-i3.list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>更新ubuntu本地源信息&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010205217930.png"
+width="914"
+height="196"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010205217930_huf8cdc55bacef5c2c1ba0ae8d3e90b179_65526_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010205217930_huf8cdc55bacef5c2c1ba0ae8d3e90b179_65526_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="466"
+data-flex-basis="1119px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">~#apt update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>安装i3wm&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359.png"
+width="1618"
+height="340"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359_hu08752ba7ad548d0fa198580f976d04bc_194879_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359_hu08752ba7ad548d0fa198580f976d04bc_194879_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="475"
+data-flex-basis="1142px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">~#apt install i3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="4">
+&lt;li>进入i3wm
+&lt;ol>
+&lt;li>执行&lt;code>reboot&lt;/code>重启系统&lt;/li>
+&lt;li>选择&lt;code>i3wm&lt;/code>作为桌面系统&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210259809.png"
+width="1066"
+height="588"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210259809_hu40bbd53375e642240dd351b8bcd54212_995961_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210259809_hu40bbd53375e642240dd351b8bcd54212_995961_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="181"
+data-flex-basis="435px"
+>&lt;/p>
+&lt;h2 id="效果">效果
+&lt;/h2>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/2020101021044781.png"
+width="1918"
+height="936"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/2020101021044781_huedf986c988439a9f77648acbc954dcaf_58932_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/2020101021044781_huedf986c988439a9f77648acbc954dcaf_58932_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="491px"
+>&lt;/p></description></item><item><title>Ubuntu下chrome中五笔输入法不能通过shift切换中英文</title><link>https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/</link><pubDate>Sat, 01 Feb 2020 23:22:50 +0800</pubDate><guid>https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/</guid><description>&lt;blockquote>
+&lt;p>&lt;strong>背景：&lt;/strong> 鉴于自己前后鼻音和平翘舌不分的缘故，我也是恨下心来使用五笔输入法，在使用的过程中还是有很多问题。其中一个就是在chrome中，五笔输入法不能通过shift（包括其他中英文切换按键）中英文。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>系统版本：&lt;/strong> Ubuntu18.04 (linux 5.3.0-28-generic)&lt;/p>
+&lt;p>&lt;strong>chrome版本：&lt;/strong> Version 79.0.3945.130 (Official Build) (64-bit)&lt;/p>
+&lt;p>&lt;strong>输入法：&lt;/strong> IBus 1.5.17 海峰五笔86&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAxL1NjcmVlbnNob3QtZnJvbS0yMDIwLTAyLTAxLTE4LTUyLTU0LnBuZw.png"
+width="1872"
+height="1012"
+srcset="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu448ff0d658890b58302b4edb16f41205_190465_dde33cadbcefe985bb4143e424bec5fa.png 480w, https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu448ff0d658890b58302b4edb16f41205_190465_49a031da3f62d4f903cc5972ea9ec122.png 1024w"
+loading="lazy"
+alt="chrome五笔"
+class="gallery-image"
+data-flex-grow="184"
+data-flex-basis="443px"
+>&lt;/p>
+&lt;p>经过测试发现拼音输入法一切正常，无论是IBUS框架还是小企鹅（fcitx）框架，只有五笔输入法在chrome不能正常使用。
+目前替代方案就是添加英文输入法，然后通过win + space键切换输入法。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAxL1NjcmVlbnNob3QtZnJvbS0yMDIwLTAyLTAxLTE5LTAyLTQ1LnBuZw.png"
+width="970"
+height="691"
+srcset="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu66a434b3f58a044c220b68fc2164524d_65725_4f686ea104d5b6322541a9114a55e9bb.png 480w, https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu66a434b3f58a044c220b68fc2164524d_65725_02d203b588699cda022dab2d1a505fca.png 1024w"
+loading="lazy"
+alt="linux输入法"
+class="gallery-image"
+data-flex-grow="140"
+data-flex-basis="336px"
+>&lt;/p>
+&lt;hr>
+&lt;p>ubuntu系切换输入法快捷键：&lt;code>win + space&lt;/code>&lt;/p>
+&lt;p>&lt;b style="color:red;">  2020年2月1日 记&lt;/b>&lt;/p></description></item></channel></rss>

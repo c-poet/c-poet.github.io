@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on CPoet</title><link>https://c-poet.github.io/page/</link><description>Recent content in Pages on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Tue, 25 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://c-poet.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>个人简介</title><link>https://c-poet.github.io/page/about/</link><pubDate>Tue, 25 Jun 2024 00:00:00 +0000</pubDate><guid>https://c-poet.github.io/page/about/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#define MY_NAME &amp;#34;Wang GuoFu&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">argc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">argv&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Hello, I am %s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">MY_NAME&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="-简历">🧑‍💻 简历
+&lt;/h2>&lt;table>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;b>姓名：&lt;/b>&lt;/td>
+&lt;td>Wang GuoFu&lt;/td>
+&lt;td>&lt;b>性别：&lt;/b>&lt;/td>
+&lt;td>男&lt;/td>
+&lt;td>&lt;b>网名&lt;/b>&lt;/td>
+&lt;td>CPoet &lt;span style="font-size: 0.6em;">(曾用：asorb、llzero54)&lt;/span>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;b>座右铭：&lt;/b>&lt;/td>
+&lt;td colspan="5">&lt;span style="color: #569cd6;"> 心中若无梦，又何以致远！&lt;/span>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;b>邮箱地址：&lt;/b>&lt;/td>
+&lt;td colspan="5">&lt;a href="mailto:llzero54@foxmail.com">llzero54@foxmail.com&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="-照片墙">💘 照片墙
+&lt;/h2>&lt;h3 id="20240505-贵阳">20240505 （贵阳）
+&lt;/h3>&lt;p>&lt;img src="https://c-poet.github.io/page/about/images/20240505/01.jpg"
+width="1279"
+height="1706"
+srcset="https://c-poet.github.io/page/about/images/20240505/01_huf70fc60823fbc58a8609a075636de686_142460_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20240505/01_huf70fc60823fbc58a8609a075636de686_142460_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="极地海洋世界-牛角鱼"
+class="gallery-image"
+data-flex-grow="74"
+data-flex-basis="179px"
+>
+&lt;img src="https://c-poet.github.io/page/about/images/20240505/02.jpg"
+width="1279"
+height="1706"
+srcset="https://c-poet.github.io/page/about/images/20240505/02_hu0574d041aa78a39771c411f55984b833_486405_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20240505/02_hu0574d041aa78a39771c411f55984b833_486405_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="极地海洋世界-娃娃鱼"
+class="gallery-image"
+data-flex-grow="74"
+data-flex-basis="179px"
+>
+&lt;img src="https://c-poet.github.io/page/about/images/20240505/03.jpg"
+width="1706"
+height="1279"
+srcset="https://c-poet.github.io/page/about/images/20240505/03_hua812da48ec2e2bc60883034e9d0e4ceb_244756_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20240505/03_hua812da48ec2e2bc60883034e9d0e4ceb_244756_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="极地海洋世界-水母"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;h3 id="20220503-镇宁">20220503 （镇宁）
+&lt;/h3>&lt;p>&lt;img src="https://c-poet.github.io/page/about/images/20220503/01.jpg"
+width="2407"
+height="1080"
+srcset="https://c-poet.github.io/page/about/images/20220503/01_hu5b67d0646a1dc8875f0c8e01c2b3c720_327865_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20220503/01_hu5b67d0646a1dc8875f0c8e01c2b3c720_327865_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="黄果树瀑布"
+class="gallery-image"
+data-flex-grow="222"
+data-flex-basis="534px"
+>
+&lt;img src="https://c-poet.github.io/page/about/images/20220503/02.jpg"
+width="1440"
+height="1080"
+srcset="https://c-poet.github.io/page/about/images/20220503/02_hud1fe9d919757398b2afe49d0c701d295_356219_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20220503/02_hud1fe9d919757398b2afe49d0c701d295_356219_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="龙宫"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>
+&lt;img src="https://c-poet.github.io/page/about/images/20220503/03.jpg"
+width="1620"
+height="1080"
+srcset="https://c-poet.github.io/page/about/images/20220503/03_hub962947e4f4ad5352ef844b28daf73eb_328795_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20220503/03_hub962947e4f4ad5352ef844b28daf73eb_328795_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="W&amp;J"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="360px"
+>&lt;/p>
+&lt;h3 id="20220412">20220412
+&lt;/h3>&lt;p>&lt;img src="https://c-poet.github.io/page/about/images/20220412/01.jpg"
+width="1920"
+height="1080"
+srcset="https://c-poet.github.io/page/about/images/20220412/01_hu68a98dd2e60ea083134b3545902a1bf8_136247_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20220412/01_hu68a98dd2e60ea083134b3545902a1bf8_136247_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="芒果仔仔-壹"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>
+&lt;img src="https://c-poet.github.io/page/about/images/20220412/02.jpg"
+width="1080"
+height="1440"
+srcset="https://c-poet.github.io/page/about/images/20220412/02_hu7761b0be651f45206ee7cc034713a819_187197_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20220412/02_hu7761b0be651f45206ee7cc034713a819_187197_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="芒果仔仔-贰"
+class="gallery-image"
+data-flex-grow="75"
+data-flex-basis="180px"
+>&lt;/p>
+&lt;h3 id="20210219-施秉">20210219 （施秉）
+&lt;/h3>&lt;p>&lt;img src="https://c-poet.github.io/page/about/images/20210219/01.jpg"
+width="2400"
+height="1080"
+srcset="https://c-poet.github.io/page/about/images/20210219/01_huef4fd626efc6d4f34f1719e5ceac6458_198638_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20210219/01_huef4fd626efc6d4f34f1719e5ceac6458_198638_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="施秉夜景-壹"
+class="gallery-image"
+data-flex-grow="222"
+data-flex-basis="533px"
+>
+&lt;img src="https://c-poet.github.io/page/about/images/20210219/02.jpg"
+width="2356"
+height="1060"
+srcset="https://c-poet.github.io/page/about/images/20210219/02_hu39428f1ce384c21712b690bf754bc7d2_372391_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20210219/02_hu39428f1ce384c21712b690bf754bc7d2_372391_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="施秉夜景-贰"
+class="gallery-image"
+data-flex-grow="222"
+data-flex-basis="533px"
+>
+&lt;img src="https://c-poet.github.io/page/about/images/20210219/03.jpg"
+width="2400"
+height="1080"
+srcset="https://c-poet.github.io/page/about/images/20210219/03_hu7e17dfa0c018190857c8605ae36cb463_163717_480x0_resize_q75_box.jpg 480w, https://c-poet.github.io/page/about/images/20210219/03_hu7e17dfa0c018190857c8605ae36cb463_163717_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="施秉夜景-叁"
+class="gallery-image"
+data-flex-grow="222"
+data-flex-basis="533px"
+>&lt;/p></description></item><item><title>Archives</title><link>https://c-poet.github.io/page/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://c-poet.github.io/page/archives/</guid><description/></item><item><title>Projects</title><link>https://c-poet.github.io/page/projects/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://c-poet.github.io/page/projects/</guid><description/></item><item><title>Search</title><link>https://c-poet.github.io/page/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://c-poet.github.io/page/search/</guid><description/></item></channel></rss>

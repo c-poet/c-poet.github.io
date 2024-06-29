@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The linux System on CPoet</title><link>https://c-poet.github.io/categories/linux/</link><description>Recent content in The linux System on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Wed, 17 Apr 2024 08:47:29 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux恢复正在运行进程的执行文件</title><link>https://c-poet.github.io/post/linux/linux-recovery-running-file/</link><pubDate>Wed, 17 Apr 2024 08:47:29 +0800</pubDate><guid>https://c-poet.github.io/post/linux/linux-recovery-running-file/</guid><description>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir.png" alt="Featured image of post Linux恢复正在运行进程的执行文件" />&lt;blockquote>
+&lt;p>最近测试环境上的JAR包和配置文件被误删除了，导致系统不能正常访问。由于是在内网环境，导致删除恢复软件不能被正常安装，因此只能临时恢复正在执行的JAR包，保证系统能正常访问。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="操作步骤">操作步骤
+&lt;/h2>&lt;h3 id="环境准备">环境准备
+&lt;/h3>&lt;ol>
+&lt;li>启用jar应用&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">java -jar client-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/start-application.png"
+width="1980"
+height="566"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/start-application_hua0baf1f17ae0c62f25f0f88877914a5c_144879_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/start-application_hua0baf1f17ae0c62f25f0f88877914a5c_144879_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="启用应用程序"
+class="gallery-image"
+data-flex-grow="349"
+data-flex-basis="839px"
+>&lt;/p>
+&lt;ol start="2">
+&lt;li>删除jar包&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">rm -rf client-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="恢复文件">恢复文件
+&lt;/h3>&lt;ol>
+&lt;li>查询进程号&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">ps aux&lt;span class="p">|&lt;/span>grep java&lt;span class="p">|&lt;/span>grep client
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-pid.png"
+width="1970"
+height="205"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-pid_hua33c59d401a6b76abbc8a2589b9501c1_78018_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/query-pid_hua33c59d401a6b76abbc8a2589b9501c1_78018_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="查询进程号"
+class="gallery-image"
+data-flex-grow="960"
+data-flex-basis="2306px"
+>&lt;/p>
+&lt;ol start="2">
+&lt;li>进入进程目录&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># cd /proc/进程号/fd&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /proc/84885/fd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看文件信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ls -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir.png"
+width="1514"
+height="745"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir_hu8289273e5865ee1a9c9c217e668bb68d_153946_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir_hu8289273e5865ee1a9c9c217e668bb68d_153946_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ls -l"
+class="gallery-image"
+data-flex-grow="203"
+data-flex-basis="487px"
+>&lt;/p>
+&lt;ol start="3">
+&lt;li>恢复执行文件&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 5是删除文件的映射文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cat &lt;span class="m">5&lt;/span> &amp;gt; /root/demo/client-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看恢复结果&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /root/demo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ls -lh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-recovery-result.png"
+width="1272"
+height="150"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-recovery-result_hu15827f6789364af46526fd4810188661_25300_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/query-recovery-result_hu15827f6789364af46526fd4810188661_25300_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="恢复结果"
+class="gallery-image"
+data-flex-grow="848"
+data-flex-basis="2035px"
+>&lt;/p>
+&lt;ol start="4">
+&lt;li>查看结果&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="sheel脚本批量恢复">Sheel脚本（批量恢复）
+&lt;/h2>&lt;blockquote>
+&lt;p>由于环境涉及的应用较多，我编写了恢复shell脚本，可以恢复整个目录中的执行文件。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> pid in &lt;span class="k">$(&lt;/span>ps aux &lt;span class="p">|&lt;/span> grep java &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{ print $2 }&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Try to recover the files of &lt;/span>&lt;span class="nv">$pid&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> file in &lt;span class="k">$(&lt;/span>ls -l /proc/&lt;span class="nv">$pid&lt;/span>/fd &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{print $9}&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">symlink_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>ls -l /proc/&lt;span class="nv">$pid&lt;/span>/fd/&lt;span class="nv">$file&lt;/span> &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{print $11}&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># 判断是否满足恢复的条件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> &lt;span class="nv">$symlink_dir&lt;/span> &lt;span class="o">=&lt;/span>~ ^/data/soft/.*$ &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> ! -d &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>dirname symlink_dir&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mkdir -p &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>dirname symlink_dir&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> ! -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cat &lt;span class="s2">&amp;#34;/proc/&lt;/span>&lt;span class="nv">$pid&lt;/span>&lt;span class="s2">/fd/&lt;/span>&lt;span class="nv">$file&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &amp;gt; &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Copied &lt;/span>&lt;span class="nv">$file&lt;/span>&lt;span class="s2"> to &lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$file&lt;/span>&lt;span class="s2"> already exists in &lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">. Skipping...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Linux服务器统一应用服务管理和统一应用日志管理</title><link>https://c-poet.github.io/post/linux/linux-service-log-manage/</link><pubDate>Thu, 14 Jul 2022 20:53:50 +0800</pubDate><guid>https://c-poet.github.io/post/linux/linux-service-log-manage/</guid><description>&lt;h2 id="应用服务">应用服务
+&lt;/h2>&lt;h3 id="配置方式">配置方式
+&lt;/h3>&lt;p>在Linux服务器中，应用服务可以通过Linux的“服务管理器”进行统一管理。在应用部署时只需要在&lt;code>/etc/systemd/system&lt;/code>或&lt;code>/etc/systemd/user&lt;/code>目录下编写如下格式的service文本即可将服务交由&lt;code>systemctl&lt;/code>管理。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># demo.service&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>Unit&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 服务描述 &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">Description&lt;/span>&lt;span class="o">=&lt;/span>演示示例服务
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>Service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 定义执行的命令&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">ExecStart&lt;/span>&lt;span class="o">=&lt;/span>java -jar /opt/*.jar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 指定执行命令的用户&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">User&lt;/span>&lt;span class="o">=&lt;/span>deamon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>注意：&lt;/strong> 建议使用&lt;code>限权的用户&lt;/code>（例如：deamon）来启动应用服务以提升系统安全性。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="常用命令">常用命令
+&lt;/h3>&lt;blockquote>
+&lt;p>使用systemctl命令时需要进行提权，可以使用&lt;code>su&lt;/code>命令切换到高权限用户或者使用&lt;code>sudo&lt;/code>命令进行提权。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 启动服务&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl start &lt;span class="o">[&lt;/span>demo.service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 停止服务&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl stop &lt;span class="o">[&lt;/span>demo.service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 重启服务&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl restart &lt;span class="o">[&lt;/span>demo.service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 服务状态&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl status &lt;span class="o">[&lt;/span>demo.service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 开机自启&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl &lt;span class="nb">enable&lt;/span> &lt;span class="o">[&lt;/span>demo.service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 关闭自启&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl disable &lt;span class="o">[&lt;/span>demo.service&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="补充说明">补充说明
+&lt;/h3>&lt;p>多数情况下都是通过&lt;strong>应用日志&lt;/strong>来排查应用问题，但是存在极少数的非运行时问题，比如：&lt;em>应用的路径配置不正确&lt;/em>。这种问题可以通过&lt;code>systemctl status&lt;/code>进行初步问题的排查，更多日志信息可以通过监听&lt;code>/var/log/messages&lt;/code>文件来获取。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># eg: 查看服务日志&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo tail -900f /var/log/messages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="应用日志">应用日志
+&lt;/h2>&lt;h3 id="要求说明">要求说明
+&lt;/h3>&lt;p>统一应用日志管理几点要求：&lt;/p>
+&lt;ol>
+&lt;li>统一输出目录；&lt;/li>
+&lt;li>统一日志格式规范（例如：分warn级别和info级别的日志）；&lt;/li>
+&lt;li>日志自动压缩和自动清理。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>统一日志目录和格式规范的话，对于运维人员和开发人员都可以快速的提取和分析日志。（就算应用不是自己部署的情况下，也可以在约定的目录找到服务运行日志）。很多情况下，日志是帮助运维、开发人员分析现有问题的工具，那么历史日志的价值就会很低，因此建议保留15至30天的日志即可。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="logback配置示例">logback配置示例
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;configuration&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!--读取SpringBoot中的配置--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 日志输出路径 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;springProperty&lt;/span> &lt;span class="na">scope=&lt;/span>&lt;span class="s">&amp;#34;context&amp;#34;&lt;/span> &lt;span class="na">name=&lt;/span>&lt;span class="s">&amp;#34;logRoot&amp;#34;&lt;/span> &lt;span class="na">source=&lt;/span>&lt;span class="s">&amp;#34;logging.file.path&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 应用名称，作为日志文件的特征符号 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;springProperty&lt;/span> &lt;span class="na">scope=&lt;/span>&lt;span class="s">&amp;#34;context&amp;#34;&lt;/span> &lt;span class="na">name=&lt;/span>&lt;span class="s">&amp;#34;logModule&amp;#34;&lt;/span> &lt;span class="na">source=&lt;/span>&lt;span class="s">&amp;#34;spring.application.name&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 警告及以上级别的日志 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;appender&lt;/span> &lt;span class="na">name=&lt;/span>&lt;span class="s">&amp;#34;FILE_WARN&amp;#34;&lt;/span> &lt;span class="na">class=&lt;/span>&lt;span class="s">&amp;#34;ch.qos.logback.core.rolling.RollingFileAppender&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;filter&lt;/span> &lt;span class="na">class=&lt;/span>&lt;span class="s">&amp;#34;ch.qos.logback.classic.filter.LevelFilter&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;level&amp;gt;&lt;/span>WARN&lt;span class="nt">&amp;lt;/level&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;onMatch&amp;gt;&lt;/span>ACCEPT&lt;span class="nt">&amp;lt;/onMatch&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;onMismatch&amp;gt;&lt;/span>DENY&lt;span class="nt">&amp;lt;/onMismatch&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/filter&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;file&amp;gt;&lt;/span>${logRoot}/${logModule}-warn.log&lt;span class="nt">&amp;lt;/file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;rollingPolicy&lt;/span> &lt;span class="na">class=&lt;/span>&lt;span class="s">&amp;#34;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;fileNamePattern&amp;gt;&lt;/span>${logRoot}/${logModule}-warn-%d{yyyy-MM-dd}.log.zip&lt;span class="nt">&amp;lt;/fileNamePattern&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;maxHistory&amp;gt;&lt;/span>360&lt;span class="nt">&amp;lt;/maxHistory&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/rollingPolicy&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;encoder&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;pattern&amp;gt;&lt;/span>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} [%file:%line] -%msg %n&lt;span class="nt">&amp;lt;/pattern&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/encoder&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/appender&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 所有级别的日志 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;appender&lt;/span> &lt;span class="na">name=&lt;/span>&lt;span class="s">&amp;#34;FILE_ALL&amp;#34;&lt;/span> &lt;span class="na">class=&lt;/span>&lt;span class="s">&amp;#34;ch.qos.logback.core.rolling.RollingFileAppender&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;file&amp;gt;&lt;/span>${logRoot}/${logModule}-all.log&lt;span class="nt">&amp;lt;/file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;rollingPolicy&lt;/span> &lt;span class="na">class=&lt;/span>&lt;span class="s">&amp;#34;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;fileNamePattern&amp;gt;&lt;/span>${logRoot}/${logModule}-all-%d{yyyy-MM-dd}.log.zip&lt;span class="nt">&amp;lt;/fileNamePattern&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;maxHistory&amp;gt;&lt;/span>36&lt;span class="nt">&amp;lt;/maxHistory&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/rollingPolicy&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;encoder&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;pattern&amp;gt;&lt;/span>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} [%file:%line] -%msg %n&lt;span class="nt">&amp;lt;/pattern&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/encoder&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/appender&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 应用配置 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;root&lt;/span> &lt;span class="na">level=&lt;/span>&lt;span class="s">&amp;#34;INFO&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;appender-ref&lt;/span> &lt;span class="na">ref=&lt;/span>&lt;span class="s">&amp;#34;FILE_WARN&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;appender-ref&lt;/span> &lt;span class="na">ref=&lt;/span>&lt;span class="s">&amp;#34;FILE_ALL&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/root&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/configuration&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="spring-boot配置">Spring Boot配置
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">logging&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># 指定配置文件&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">config&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">logback.xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">file&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># 指定日志输出目录&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/data/logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="nginx配置">nginx配置
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># 错误级别的日志输出
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">error_log /data/logs error;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # 日志格式
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> log_format main &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # 访问日志输出，指定输出目录和日志格式
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> access_log /data/logs main;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>日志变量说明：&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$remote_addr&lt;/span> &lt;span class="nx">：记录访问网站的客户端地址&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$remote_user&lt;/span> &lt;span class="nx">：记录远程客户端用户名称&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$time_local&lt;/span> &lt;span class="nx">：记录访问时间与时区&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$request&lt;/span> &lt;span class="nx">：记录用户的&lt;/span> &lt;span class="nx">http&lt;/span> &lt;span class="nx">请求起始行信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$status&lt;/span> &lt;span class="nx">：记录&lt;/span> &lt;span class="nx">http&lt;/span> &lt;span class="nx">状态码，即请求返回的状态，例如&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="nx">、404&lt;/span> &lt;span class="nx">、502&lt;/span> &lt;span class="nx">等&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$body_bytes_sent&lt;/span> &lt;span class="nx">：记录服务器发送给客户端的响应&lt;/span> &lt;span class="nx">body&lt;/span> &lt;span class="nx">字节数&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$http_referer&lt;/span> &lt;span class="nx">：记录此次请求是从哪个链接访问过来的，可以根据&lt;/span> &lt;span class="nx">referer&lt;/span> &lt;span class="nx">进行防盗链设置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$http_user_agent&lt;/span> &lt;span class="nx">：记录客户端访问信息，如浏览器、手机客户端等&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$http_x_forwarded_for&lt;/span> &lt;span class="nx">：当前端有代理服务器时，设置&lt;/span> &lt;span class="nx">Web&lt;/span> &lt;span class="nx">节点记录客户端地址的配置，此参数生效的前提是代理服务器上也进行了相关的&lt;/span> &lt;span class="nx">x_forwarded_for&lt;/span> &lt;span class="nx">设置&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Ubuntu安装i3wm（i3窗口管理器）</title><link>https://c-poet.github.io/post/linux/ubuntu-install-i3wm/</link><pubDate>Sat, 10 Oct 2020 22:33:37 +0800</pubDate><guid>https://c-poet.github.io/post/linux/ubuntu-install-i3wm/</guid><description>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359.png" alt="Featured image of post Ubuntu安装i3wm（i3窗口管理器）" />&lt;h2 id="步骤">步骤
+&lt;/h2>&lt;ol>
+&lt;li>添加最新稳定版的i3wm软件源信息&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010204932107.png"
+width="1630"
+height="276"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010204932107_hu2f990b8b58443aea3cdf53ebc90cbe03_163065_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010204932107_hu2f990b8b58443aea3cdf53ebc90cbe03_163065_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="590"
+data-flex-basis="1417px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">~$ su -
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~# /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~# dpkg -i ./keyring.deb
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">~# &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;deb https://debian.sur5r.net/i3/ &lt;/span>&lt;span class="k">$(&lt;/span>grep &lt;span class="s1">&amp;#39;^DISTRIB_CODENAME=&amp;#39;&lt;/span> /etc/lsb-release &lt;span class="p">|&lt;/span> cut -f2 -d&lt;span class="o">=&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2"> universe&amp;#34;&lt;/span> &amp;gt;&amp;gt; /etc/apt/sources.list.d/sur5r-i3.list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>更新ubuntu本地源信息&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010205217930.png"
+width="914"
+height="196"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010205217930_huf8cdc55bacef5c2c1ba0ae8d3e90b179_65526_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010205217930_huf8cdc55bacef5c2c1ba0ae8d3e90b179_65526_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="466"
+data-flex-basis="1119px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">~#apt update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>安装i3wm&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359.png"
+width="1618"
+height="340"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359_hu08752ba7ad548d0fa198580f976d04bc_194879_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210117359_hu08752ba7ad548d0fa198580f976d04bc_194879_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="475"
+data-flex-basis="1142px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">~#apt install i3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="4">
+&lt;li>进入i3wm
+&lt;ol>
+&lt;li>执行&lt;code>reboot&lt;/code>重启系统&lt;/li>
+&lt;li>选择&lt;code>i3wm&lt;/code>作为桌面系统&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210259809.png"
+width="1066"
+height="588"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210259809_hu40bbd53375e642240dd351b8bcd54212_995961_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/20201010210259809_hu40bbd53375e642240dd351b8bcd54212_995961_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="181"
+data-flex-basis="435px"
+>&lt;/p>
+&lt;h2 id="效果">效果
+&lt;/h2>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/2020101021044781.png"
+width="1918"
+height="936"
+srcset="https://c-poet.github.io/post/linux/ubuntu-install-i3wm/2020101021044781_huedf986c988439a9f77648acbc954dcaf_58932_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/ubuntu-install-i3wm/2020101021044781_huedf986c988439a9f77648acbc954dcaf_58932_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="491px"
+>&lt;/p></description></item><item><title>Linux忘记密码解决方案-紧急救援模式密码重置</title><link>https://c-poet.github.io/post/linux/centos-reset-root-password/</link><pubDate>Tue, 06 Oct 2020 23:05:30 +0800</pubDate><guid>https://c-poet.github.io/post/linux/centos-reset-root-password/</guid><description>&lt;img src="https://c-poet.github.io/post/linux/centos-reset-root-password/20201006224245486.png" alt="Featured image of post Linux忘记密码解决方案-紧急救援模式密码重置" />&lt;ol>
+&lt;li>在GRUD启动选择界面按下&lt;code>e&lt;/code>键进入启动项编辑界面&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/centos-reset-root-password/20201006221806619.png"
+width="720"
+height="400"
+srcset="https://c-poet.github.io/post/linux/centos-reset-root-password/20201006221806619_hu6b82da3b67c302e1a1eb9b3fda528d0a_13765_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/centos-reset-root-password/20201006221806619_hu6b82da3b67c302e1a1eb9b3fda528d0a_13765_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;ol start="2">
+&lt;li>在&lt;code>linux16&lt;/code>这一行的后面加上&lt;code>rd.break&lt;/code>，在按下&lt;code>Ctrl + x&lt;/code>(或 &lt;code>F10&lt;/code>)的组合键以进入&lt;code>Linux的紧急救援模式&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/centos-reset-root-password/20201006222513797.png"
+width="720"
+height="400"
+srcset="https://c-poet.github.io/post/linux/centos-reset-root-password/20201006222513797_hu8f7d77a8c5e4bcc69bc978bdde4333f0_28694_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/centos-reset-root-password/20201006222513797_hu8f7d77a8c5e4bcc69bc978bdde4333f0_28694_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;ol start="3">
+&lt;li>在紧急救援模式下执行下列的命令完成密码重置&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 以读写的方式重新挂载sysroot&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mount -o remount,rw /sysroot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 切换至sysroot&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chroot /sysroot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 密码重置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 格式： echo 密码|passwd 用户名 --stdin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> 123456&lt;span class="p">|&lt;/span>passwd root --stdin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使配置生效&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">touch /.autorelabel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 退出sysroot并重启&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">exit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">reboot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/centos-reset-root-password/20201006224245486.png"
+width="800"
+height="185"
+srcset="https://c-poet.github.io/post/linux/centos-reset-root-password/20201006224245486_hu25f0f61b8e21cc07146e9bd5cd0cc32e_11165_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/centos-reset-root-password/20201006224245486_hu25f0f61b8e21cc07146e9bd5cd0cc32e_11165_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="432"
+data-flex-basis="1037px"
+>&lt;/p>
+&lt;p>&lt;strong>重启后即可使用新密码进行登录&lt;/strong>&lt;/p></description></item><item><title>Ubuntu下chrome中五笔输入法不能通过shift切换中英文</title><link>https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/</link><pubDate>Sat, 01 Feb 2020 23:22:50 +0800</pubDate><guid>https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/</guid><description>&lt;blockquote>
+&lt;p>&lt;strong>背景：&lt;/strong> 鉴于自己前后鼻音和平翘舌不分的缘故，我也是恨下心来使用五笔输入法，在使用的过程中还是有很多问题。其中一个就是在chrome中，五笔输入法不能通过shift（包括其他中英文切换按键）中英文。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>系统版本：&lt;/strong> Ubuntu18.04 (linux 5.3.0-28-generic)&lt;/p>
+&lt;p>&lt;strong>chrome版本：&lt;/strong> Version 79.0.3945.130 (Official Build) (64-bit)&lt;/p>
+&lt;p>&lt;strong>输入法：&lt;/strong> IBus 1.5.17 海峰五笔86&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAxL1NjcmVlbnNob3QtZnJvbS0yMDIwLTAyLTAxLTE4LTUyLTU0LnBuZw.png"
+width="1872"
+height="1012"
+srcset="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu448ff0d658890b58302b4edb16f41205_190465_dde33cadbcefe985bb4143e424bec5fa.png 480w, https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu448ff0d658890b58302b4edb16f41205_190465_49a031da3f62d4f903cc5972ea9ec122.png 1024w"
+loading="lazy"
+alt="chrome五笔"
+class="gallery-image"
+data-flex-grow="184"
+data-flex-basis="443px"
+>&lt;/p>
+&lt;p>经过测试发现拼音输入法一切正常，无论是IBUS框架还是小企鹅（fcitx）框架，只有五笔输入法在chrome不能正常使用。
+目前替代方案就是添加英文输入法，然后通过win + space键切换输入法。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAxL1NjcmVlbnNob3QtZnJvbS0yMDIwLTAyLTAxLTE5LTAyLTQ1LnBuZw.png"
+width="970"
+height="691"
+srcset="https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu66a434b3f58a044c220b68fc2164524d_65725_4f686ea104d5b6322541a9114a55e9bb.png 480w, https://c-poet.github.io/post/linux/ubuntu-chrome-wubi/_hu66a434b3f58a044c220b68fc2164524d_65725_02d203b588699cda022dab2d1a505fca.png 1024w"
+loading="lazy"
+alt="linux输入法"
+class="gallery-image"
+data-flex-grow="140"
+data-flex-basis="336px"
+>&lt;/p>
+&lt;hr>
+&lt;p>ubuntu系切换输入法快捷键：&lt;code>win + space&lt;/code>&lt;/p>
+&lt;p>&lt;b style="color:red;">  2020年2月1日 记&lt;/b>&lt;/p></description></item><item><title>最新Linux程序重启、开启关闭开机启动功能</title><link>https://c-poet.github.io/post/linux/linux-service-start-command/</link><pubDate>Sun, 17 Mar 2019 00:02:01 +0800</pubDate><guid>https://c-poet.github.io/post/linux/linux-service-start-command/</guid><description>&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在开发的过程中，我们都需要用到很多的开发环境，但是在平时开发环境就没有必要运行起来，因此关闭程序的开机启动是很有必要的。前期AS也是在网上搜索了很多关于&lt;strong>Linux下关闭程序自启动&lt;/strong>的方法，但是都失败了。后来在学习Linux的时候，我才知道网上的方法适用于使用system v into启动的Linux，而现在大多数的Linux衍生版已经使用systemd启动。因此在管理程序的时候还是有一定的区别。
+下面我就列出两种启动加载下的命令，可根据自己使用Linux的情况使用命令。&lt;/p>
+&lt;h2 id="systemd">Systemd
+&lt;/h2>&lt;h3 id="启动服务">启动服务
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">systemctl start servicename.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="关闭服务">关闭服务
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">systemctl stop servicename.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="重启服务">重启服务
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">systemctl restart sevicename.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="重新加载配置文件">重新加载配置文件
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">systemctl reload sevicename.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="查看服务状态">查看服务状态
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">systemctl status revicename.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="开机自启动">开机自启动
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">systemctl enable revicename.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="关闭开机自启动">关闭开机自启动
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">systemctl disable revicename.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="system-v-init">System V init
+&lt;/h2>&lt;h3 id="启动服务-1">启动服务
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">service servicename start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="关闭服务-1">关闭服务
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">service servicename stop
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="重启服务-1">重启服务
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">service servicename restart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="重新加载配置文件-1">重新加载配置文件
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">service servicename reload
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="查看服务状态-1">查看服务状态
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">service servicename status
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="开机自启动-1">开机自启动
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">chkconfig servicename on
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="关闭开机自启动-1">关闭开机自启动
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">chkconfig servicename off
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="end">END
+&lt;/h2></description></item><item><title>在apache-tomcat下配置PHP环境</title><link>https://c-poet.github.io/post/linux/apache-tomcat-php/</link><pubDate>Wed, 05 Dec 2018 00:19:32 +0800</pubDate><guid>https://c-poet.github.io/post/linux/apache-tomcat-php/</guid><description>&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>第一次接触tomcat就要增加PHP环境支持，tomcat主要是用来支持JAVAWEB的，在我看来是有一定的难度。但是因为某些需求，还是决定上网搜索相关教程。搜索后发现有这方面需求的人还挺多，教程也挺多。研究了一番，主要分成两种方法：\1、在服务器上安装PHP环境后，修改web.xml和content.xml文件，完成以后把PHP项目移动到特定的目录中就可以访问PHP项目，（遗憾的是，我配置了几次都没有成功。在访问的时候会被服务器上的JSP项目强制跳转。）。2、方法与第一种类似，在安装PHP环境后，只需要修改web.xml文件，就可以在网站根目录下任意位置访问PHP项目。显然这是一个真正意义上的JAVAWEB+PHP环境。
+由于相关教程在网上已经非常详细，我就直接转载到自己的博客中。以便满足以后可能出现的需求。&lt;/p>
+&lt;h2 id="第一种配置方法">第一种配置方法
+&lt;/h2>&lt;ol>
+&lt;li>请移步到&lt;a class="link" href="http://www.cnblogs.com/cisum/p/7845028.html" target="_blank" rel="noopener"
+>http://www.cnblogs.com/cisum/p/7845028.html
+&lt;/a>阅读&lt;/li>
+&lt;li>访问成功后，可以把index.php添加到默认入口文件。
+添加方法：在conf下的web.xml中找到&lt;welcome-file-list>标签，并在其中加入&amp;lt;FileName.php&amp;gt;。如下&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;welcome-file-list&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;welcome-file&amp;gt;&lt;/span>index.html&lt;span class="nt">&amp;lt;/welcome-file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;welcome-file&amp;gt;&lt;/span>index.htm&lt;span class="nt">&amp;lt;/welcome-file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;welcome-file&amp;gt;&lt;/span>index.jsp&lt;span class="nt">&amp;lt;/welcome-file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;welcome-file&amp;gt;&lt;/span>index.php&lt;span class="nt">&amp;lt;/welcome-file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/welcome-file-list&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="第二种配置方法">第二种配置方法
+&lt;/h2>&lt;ol>
+&lt;li>你需要下载PHP环境，并把PHP加入环境变量中。第一种配置方法安装PHP。&lt;/li>
+&lt;li>配置tomcat支持php项目
+下载jar包使tomcat支持php项目
+下载地址：链接：https://pan.baidu.com/s/1F77MjMkw9qTHXXRT_IcwtQ 提取码：xcyd
+下载以后将其解压，并把jar文件移到tomcat的lib目录下&lt;/li>
+&lt;/ol>
+&lt;p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-va65egzN-1601773814969)(https://www.orbpi.cn/img/1802/30.jpg)]
+接下来就是修改web.xml文件，找到&lt;web-app>标签，并在其中加入如下代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;listener&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;listener-class&amp;gt;&lt;/span>php.java.servlet.ContextLoaderListener&lt;span class="nt">&amp;lt;/listener-class&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/listener&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-name&amp;gt;&lt;/span>PhpJavaServlet&lt;span class="nt">&amp;lt;/servlet-name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-class&amp;gt;&lt;/span>php.java.servlet.PhpJavaServlet&lt;span class="nt">&amp;lt;/servlet-class&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/servlet&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-name&amp;gt;&lt;/span>PhpCGIServlet&lt;span class="nt">&amp;lt;/servlet-name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-class&amp;gt;&lt;/span>php.java.servlet.fastcgi.FastCGIServlet&lt;span class="nt">&amp;lt;/servlet-class&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;init-param&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;param-name&amp;gt;&lt;/span>prefer_system_php_exec&lt;span class="nt">&amp;lt;/param-name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;param-value&amp;gt;&lt;/span>On&lt;span class="nt">&amp;lt;/param-value&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/init-param&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;init-param&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;param-name&amp;gt;&lt;/span>php_include_java&lt;span class="nt">&amp;lt;/param-name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;param-value&amp;gt;&lt;/span>Off&lt;span class="nt">&amp;lt;/param-value&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/init-param&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/servlet&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-mapping&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-name&amp;gt;&lt;/span>PhpJavaServlet&lt;span class="nt">&amp;lt;/servlet-name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;url-pattern&amp;gt;&lt;/span>*.phpjavabridge&lt;span class="nt">&amp;lt;/url-pattern&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/servlet-mapping&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-mapping&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;servlet-name&amp;gt;&lt;/span>PhpCGIServlet&lt;span class="nt">&amp;lt;/servlet-name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;url-pattern&amp;gt;&lt;/span>*.php&lt;span class="nt">&amp;lt;/url-pattern&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/servlet-mapping&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后找到&lt;welcome-file-list>节点，添加以下内容：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;welcome-file&amp;gt;&lt;/span>index.php&lt;span class="nt">&amp;lt;/welcome-file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>没出意外的话，现在PHP已经配置完成。&lt;/p>
+&lt;ol start="3">
+&lt;li>
+&lt;p>重启tomcat服务&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>测试PHP配置是否成功
+在tomcat的webapps目录下新建test.php，并在以下加入以下内容：&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span> &lt;span class="k">echo&lt;/span> &lt;span class="nx">phpinfo&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="cp">?&amp;gt;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="6">
+&lt;li>如果访问不成功，可以尝试修改访问端口，如80。&lt;/li>
+&lt;/ol>
+&lt;h2 id="end">END
+&lt;/h2>&lt;blockquote>
+&lt;p>本文内容参考网上教程，如果疏漏的地方，敬请指正！&lt;/p>
+&lt;/blockquote></description></item><item><title>apache不能重定向，不能强制跳转https，-htaccess失效解决办法</title><link>https://c-poet.github.io/post/linux/apache-rewrite-route/</link><pubDate>Wed, 14 Nov 2018 00:12:35 +0800</pubDate><guid>https://c-poet.github.io/post/linux/apache-rewrite-route/</guid><description>&lt;blockquote>
+&lt;p>解决apache服务器不能重定向，不能强制跳转https并且.htaccess失效等问题&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="apache不能重定向htaccess被关闭">apache不能重定向，.htaccess被关闭
+&lt;/h2>&lt;p>在centos系统下一键安装apache服务后，在网站根目录下建立.htaccess文件，想通过.htaccess文件实现apache的重定向。但是发现无论怎么更换.htaccess的代码，都不能重定向。这时候就需要检查.htaccess是否被关闭。&lt;/p>
+&lt;ol>
+&lt;li>打开apache的配置文件&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">vim /etc/httpd/conf/httpd.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>检查配置文件&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">AllowOverride Node #338行附近
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#修改为
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AllowOverrlid All #打开.htaccess
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>.htaccess打开后，还是不能访问可以检查文件名称是否正确。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">AccessFileName .htaccess #409行附近，检查AccessFileName后面的文件名是否正确，可自定义
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>修改完成后，需要重启服务器&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">service https restart #重启服务器
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="实现强制跳转https">实现强制跳转https
+&lt;/h2>&lt;p>要想实现强制跳转https，一般是通过301重定向实现的。针对服务器管理员和网站管理员有以下不同的方法。&lt;/p>
+&lt;ol>
+&lt;li>在配置文件中增加跳转代码&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">#在apache配置文件中增加下面代码
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>VirtualHost *:80&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ServerAdmin ASorb
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DocumentRoot /var/www/html/wordpress #网站目录
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ServerName www.orbpi.cn #修改为自己的域名
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RewriteEngine on
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RewriteCond %{HTTPS} !=on
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RewriteRule &lt;span class="se">^(&lt;/span>.*) https://%{SERVER_NAME}$1 [L,R]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>/VirtualHost&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#添加后需要重启服务器
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">service httpd restart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>.htaccess文件实现（使用前请按照上述方法确定.htsccess是否处于打开状态）
+在网站根目录下建立.htaccess文件，将下面代码写入.htsccess文件中。( 重要提示：必须将代码放到.htaccess文件内容的最前面，以保证重定向优先权。)&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">#代码如下：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteEngine On
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteCond %{SERVER_PORT} 80
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteRule &lt;span class="se">^(&lt;/span>.*)$ https://www.orbpi.cn/$1 [R,L]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#或者
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteEngine On
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteCond %{SERVER_PORT} 80
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteRule &lt;span class="se">^(&lt;/span>.*)$ https://www.orbpi.cn/$1 [R=301,L]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#又或者
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteEngine on
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteBase /
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteCond %{SERVER_PORT} !&lt;span class="se">^4&lt;/span>43$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteRule &lt;span class="se">^.&lt;/span>*$ https://&lt;span class="nv">%{SERVER_NAME}%&lt;/span>{REQUEST_URI} [L,R]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#注意：如果是在子目录，可以用
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteEngine On
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteCond %{SERVER_PORT} 80
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteCond %{REQUEST_URI} subfolder
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RewriteRule &lt;span class="se">^(&lt;/span>.*)$ https://www.orbpi.cn/subfolder [R,L]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="效验是否成功跳转">效验是否成功跳转
+&lt;/h2>&lt;p>检验是否能够重定向最简单的方法就是通过浏览器的访问，首先在浏览器中访问http://你的网址/，等待响应后，看网址是否变成https://你的网址/，如果发生改变就说明跳转成功，否则失败。有时候不能跳转可能不是服务器的配置问题，有可能是本地浏览器的缓存问题。例如谷歌浏览器就有缓存机制，所以在验证的时候可以先清除缓存在进行效验。&lt;/p>
+&lt;h2 id="end">END
+&lt;/h2>&lt;blockquote>
+&lt;p>参考：百度百科&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

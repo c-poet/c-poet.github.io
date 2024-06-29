@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>QT on CPoet</title><link>https://c-poet.github.io/categories/framework/qt/</link><description>Recent content in QT on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Sun, 09 Feb 2020 23:14:20 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/categories/framework/qt/index.xml" rel="self" type="application/rss+xml"/><item><title>QT编译Mysql驱动(Mariadb驱动),解决qmake报错问题</title><link>https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/</link><pubDate>Sun, 09 Feb 2020 23:14:20 +0800</pubDate><guid>https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/</guid><description>&lt;img src="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAyL0RlZXBpblNjcmVlbnNob3Rfc2VsZWN0LWFyZWFfMjAyMDAyMDkxODE2NTIucG5n.png" alt="Featured image of post QT编译Mysql驱动(Mariadb驱动),解决qmake报错问题" />&lt;h2 id="编译环境">编译环境
+&lt;/h2>&lt;ol>
+&lt;li>系统：Ubuntu18.04&lt;/li>
+&lt;li>QT版本：Qt 5.14.0&lt;/li>
+&lt;li>gcc版本：gcc version 7.5.0&lt;/li>
+&lt;/ol>
+&lt;h2 id="qt官方编译驱动方式">qt官方编译驱动方式
+&lt;/h2>&lt;p>在使用QT连接数据库时遇见的第一个错误就是&lt;code>QMYSQL driver not loaded&lt;/code>，显然这是缺少mysql的驱动。我们需要手动编译mysql的驱动，qt官方给出的编译教程如下：&lt;/p>
+&lt;p>细看访问qt网站：&lt;a class="link" href="https://doc.qt.io/qt-5/sql-driver.html" target="_blank" rel="noopener"
+>https://doc.qt.io/qt-5/sql-driver.html&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">Qt5&lt;/span>\&lt;span class="mf">5.13.2&lt;/span>\&lt;span class="n">Src&lt;/span>\&lt;span class="n">qtbase&lt;/span>\&lt;span class="n">src&lt;/span>\&lt;span class="n">plugins&lt;/span>\&lt;span class="n">sqldrivers&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">qmake&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">version&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">QMake&lt;/span> &lt;span class="n">version&lt;/span> &lt;span class="mf">3.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Using&lt;/span> &lt;span class="n">Qt&lt;/span> &lt;span class="n">version&lt;/span> &lt;span class="mf">5.13.2&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">Qt5&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mf">5.13.2&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mingw73_64&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">lib&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">Qt5&lt;/span>\&lt;span class="mf">5.13.2&lt;/span>\&lt;span class="n">Src&lt;/span>\&lt;span class="n">qtbase&lt;/span>\&lt;span class="n">src&lt;/span>\&lt;span class="n">plugins&lt;/span>\&lt;span class="n">sqldrivers&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">qmake&lt;/span> &lt;span class="o">--&lt;/span> &lt;span class="n">MYSQL_INCDIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;C:/Program Files/MySQL/MySQL Connector C 6.1/include&amp;#34;&lt;/span> &lt;span class="n">MYSQL_LIBDIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;C:/Program Files/MySQL/MySQL Connector C 6.1/lib&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Info&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">creating&lt;/span> &lt;span class="n">stash&lt;/span> &lt;span class="n">file&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">Qt5&lt;/span>\&lt;span class="mf">5.13.2&lt;/span>\&lt;span class="n">Src&lt;/span>\&lt;span class="n">qtbase&lt;/span>\&lt;span class="n">src&lt;/span>\&lt;span class="n">plugins&lt;/span>\&lt;span class="n">sqldrivers&lt;/span>\&lt;span class="o">.&lt;/span>&lt;span class="n">qmake&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stash&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Running&lt;/span> &lt;span class="n">configuration&lt;/span> &lt;span class="n">tests&lt;/span>&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">DB2&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">IBM&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">InterBase&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">MySQL&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">OCI&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Oracle&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">ODBC&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">PostgreSQL&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">SQLite&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">version&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Checking&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">TDS&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Sybase&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">...&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Done&lt;/span> &lt;span class="n">running&lt;/span> &lt;span class="n">configuration&lt;/span> &lt;span class="n">tests&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Configure&lt;/span> &lt;span class="n">summary&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Qt&lt;/span> &lt;span class="n">Sql&lt;/span> &lt;span class="n">Drivers&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DB2&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">IBM&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">..............................&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">InterBase&lt;/span> &lt;span class="o">..............................&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MySql&lt;/span> &lt;span class="o">..................................&lt;/span> &lt;span class="n">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">OCI&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Oracle&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">...........................&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ODBC&lt;/span> &lt;span class="o">...................................&lt;/span> &lt;span class="n">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">PostgreSQL&lt;/span> &lt;span class="o">.............................&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SQLite2&lt;/span> &lt;span class="o">................................&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SQLite&lt;/span> &lt;span class="o">.................................&lt;/span> &lt;span class="n">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Using&lt;/span> &lt;span class="n">system&lt;/span> &lt;span class="n">provided&lt;/span> &lt;span class="n">SQLite&lt;/span> &lt;span class="o">.........&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">TDS&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Sybase&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">...........................&lt;/span> &lt;span class="n">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Qt&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="n">now&lt;/span> &lt;span class="n">configured&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">building&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">Just&lt;/span> &lt;span class="n">run&lt;/span> &lt;span class="s1">&amp;#39;mingw32-make&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Once&lt;/span> &lt;span class="n">everything&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="n">built&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">must&lt;/span> &lt;span class="n">run&lt;/span> &lt;span class="s1">&amp;#39;mingw32-make install&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Qt&lt;/span> &lt;span class="n">will&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">installed&lt;/span> &lt;span class="n">into&lt;/span> &lt;span class="s1">&amp;#39;C:\Qt5&lt;/span>&lt;span class="se">\5&lt;/span>&lt;span class="s1">.13.2\mingw73_64&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Prior&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">reconfiguration&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">make&lt;/span> &lt;span class="n">sure&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">remove&lt;/span> &lt;span class="nb">any&lt;/span> &lt;span class="n">leftovers&lt;/span> &lt;span class="kn">from&lt;/span> &lt;span class="nn">the&lt;/span> &lt;span class="n">previous&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>按照官方的方法，我们需要找到自己mysql头文件和mysql链接库的位置。如果自己的电脑上没有则可以通过mysql网站下载（mariadb和mysql都是使用QMYSQL驱动，因此无论是下载mariadb或者mysql都可以）。如果系统是linux的用户可以通过安装mysql-dev，或者libmariadbclient-dev，不同的linux发行版其包也不同。&lt;/p>
+&lt;p>mysql connector下载地址：&lt;a class="link" href="https://downloads.mysql.com/archives/c-cpp/" target="_blank" rel="noopener"
+>https://downloads.mysql.com/archives/c-cpp/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAyL0RlZXBpblNjcmVlbnNob3Rfc2VsZWN0LWFyZWFfMjAyMDAyMDkxNjM5MTgucG5n.png"
+width="1522"
+height="752"
+srcset="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hud8032727a30bb1a5676488b11e8d52e3_145012_eaec422939488f54fe283eae4617d904.png 480w, https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hud8032727a30bb1a5676488b11e8d52e3_145012_2ae1bcec41c300e06ebecdb03089ba63.png 1024w"
+loading="lazy"
+alt="mysql connector"
+class="gallery-image"
+data-flex-grow="202"
+data-flex-basis="485px"
+>&lt;/p>
+&lt;p>选择对应自己系统版本的包下载，因为我个人不喜欢麻烦，所以我选择ubuntu的x64deb包进行安装。安装以后需要找到头文件和库文件路径。例如我的是：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">include&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysql&lt;/span> &lt;span class="c1"># 头文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">lib&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">x86_64&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">linux&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">gnu&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libmysqlcppconn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">so&lt;/span>&lt;span class="mf">.7.8.0.19&lt;/span> &lt;span class="c1"># 库文件&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果不知道确切位置，可以通过find进行搜索。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">find&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">mysql&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">dev&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">null&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">grep&lt;/span> &lt;span class="n">mysql&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">grep&lt;/span> &lt;span class="n">h&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">find&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">mysql&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">dev&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">null&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">grep&lt;/span> &lt;span class="n">mysql&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">grep&lt;/span> &lt;span class="n">so&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这时候需要把库文件复制到任意能找到的目录，并修改文件名为libmysql.so，也可以通过链接的方式。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">cp&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">lib&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">x86_64&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">linux&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">gnu&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libmysqlcppconn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">so&lt;/span>&lt;span class="mf">.7.8.0.19&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">home&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">yerain&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">Downloads&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libmysql&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">so&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># OR&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ln&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">lib&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">x86_64&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">linux&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">gnu&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libmysqlcppconn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">so&lt;/span>&lt;span class="mf">.7.8.0.19&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">home&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">yerain&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">Downloads&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libmysql&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">so&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>** 注意：如果安装的是mariadb，和mysql操作相同。**&lt;/p>
+&lt;p>接下来就是编译，在终端下切换到qtsql源文件目录下，例如我的是&lt;code>/home/yerain/Tools/Qt5.14.0/5.14.0/Src/qtbase/src/plugins/sqldrivers&lt;/code>。在此目录下执行qmake进行编译：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">qmake&lt;/span> &lt;span class="o">--&lt;/span> &lt;span class="n">MYSQL_INCDIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;/usr/include/mysql&amp;#34;&lt;/span> &lt;span class="n">LIBS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;/home/yerain/Downloads/libmysql.so&amp;#34;&lt;/span> &lt;span class="c1"># 注意修改某些参数&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 然后执行&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">make&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将生成的库文件安装到gcc目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">make&lt;/span> &lt;span class="n">install&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;b style="color:red;"> 让人遗憾的是按照官方的方法，我并没有成功编译mysql驱动。按照make的输出来看，我只成功编译了sqlite的驱动。&lt;/b>&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAyL0RlZXBpblNjcmVlbnNob3RfZ25vbWUtdGVybWluYWwtc2VydmVyXzIwMjAwMjA5MTc0MzAxLnBuZw.png"
+width="1017"
+height="462"
+srcset="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hufd8ece8542b5793cce6cccc910e0a2ff_358020_f1f4fa724181f66739300c58f0c3cf1d.png 480w, https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hufd8ece8542b5793cce6cccc910e0a2ff_358020_387113cbf1d38c31919fdc1baff5e148.png 1024w"
+loading="lazy"
+alt="官方方法编译输出"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="528px"
+>&lt;/p>
+&lt;p>&lt;b style="color:blue;">不过可能是我的环境问题，而且我引用官方原文教程只是希望多一种可以尝试的方法。&lt;/b>&lt;/p>
+&lt;h2 id="成功编译的方法">成功编译的方法
+&lt;/h2>&lt;p>该方法建立在官方教程的基础上，也就是需要将mysql(OR mariadb) connector 的头文件和库文件准备好。修改&lt;code>/home/yerain/Tools/Qt5.14.0/5.14.0/Src/qtbase/src/plugins/sqldrivers/mysql/mysql.pro&lt;/code>项目文件（注意更换为自己的qt路径），注释掉&lt;code>QMAKE_USE += mysql&lt;/code>。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># QMAKE_USE += mysql&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后添加头文件和库文件路径&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">INCLUDEPATH&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">include&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysql&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">DEPENDPATH&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">include&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysql&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">LIBS&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">home&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">yerain&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">Downloads&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libmysql&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">so&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 同样注意更换路径&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAyL0RlZXBpblNjcmVlbnNob3RfZ25vbWUtdGVybWluYWwtc2VydmVyXzIwMjAwMjA5MTgwMDI4LnBuZw.png"
+width="1017"
+height="462"
+srcset="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_huc3106f2a8546f08171af272ea2d79e2f_110421_93e8a01540f5b7503511509f58ceebdf.png 480w, https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_huc3106f2a8546f08171af272ea2d79e2f_110421_a0be11c385525ad169cc355948616e08.png 1024w"
+loading="lazy"
+alt="编辑mysql.pro"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="528px"
+>&lt;/p>
+&lt;p>添加完后在终端(windows 用cmd OR power shell)执行&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">qmake&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># qmake以后执行&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">make&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">make&lt;/span> &lt;span class="n">install&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAyL0RlZXBpblNjcmVlbnNob3Rfc2VsZWN0LWFyZWFfMjAyMDAyMDkxODE2NTIucG5n.png"
+width="894"
+height="260"
+srcset="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hu2d46c4bca4d385a8737ecab0c9834eff_175664_bbaa94a35f3ce5d7905bb3f99fa3b660.png 480w, https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hu2d46c4bca4d385a8737ecab0c9834eff_175664_1b8eed52301ad0f904f1179aa2b71257.png 1024w"
+loading="lazy"
+alt="make&amp;makeinstall"
+class="gallery-image"
+data-flex-grow="343"
+data-flex-basis="825px"
+>&lt;/p>
+&lt;p>编译完成以后即可在&lt;code>/home/yerain/Tools/Qt5.14.0/5.14.0/gcc_64/plugins/sqldrivers&lt;/code>中看到增加的libqsqlmysql.so和libqsqlmysql.so.debug文件，这代表已经&lt;strong>成功安装qmysql驱动。&lt;/strong>（如果找不到，可以检查&lt;code>/home/yerain/Tools/Qt5.14.0/5.14.0/Src/qtbase/src/plugins/sqldrivers/plugins/sqldrivers&lt;/code>下是否有这两个文件，有的话直接复制到&lt;code>Qt5.14.0/5.14.0/gcc_64/plugins/sqldrivers&lt;/code>下即可）。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAyL0RlZXBpblNjcmVlbnNob3Rfc2VsZWN0LWFyZWFfMjAyMDAyMDkxODI1MTMucG5n.png"
+width="665"
+height="165"
+srcset="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hue2a6af0ca4cc1e2693346af517cf6e96_31322_725a09fc004af3e6503350dc43646614.png 480w, https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hue2a6af0ca4cc1e2693346af517cf6e96_31322_9eaff0807bcaace2bd40f1b90b433da0.png 1024w"
+loading="lazy"
+alt="libqmysql.so"
+class="gallery-image"
+data-flex-grow="403"
+data-flex-basis="967px"
+>&lt;/p>
+&lt;h2 id="测试">测试
+&lt;/h2>&lt;p>测试代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/* QT连接数据库测试 */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;连接数据库...&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 连接mysql
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">QSqlDatabase&lt;/span> &lt;span class="n">db&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">QSqlDatabase&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">addDatabase&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;QMYSQL&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">setHostName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;localhost&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">setUserName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;root&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">setPassword&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;123456789&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">setDatabaseName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;qt_test&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">()){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;mysql连接失败！ =&amp;gt; &amp;#34;&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">lastError&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 连接失败退出程序
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;mysql连接成功！&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">QSqlQuery&lt;/span> &lt;span class="nf">query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">exec&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;select * from user&amp;#34;&lt;/span>&lt;span class="p">)){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;查询失败 =&amp;gt; &amp;#34;&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">query&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">lastError&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;查询成功&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;-----------------------------------------&amp;#34;&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">endl&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// qDebug() &amp;lt;&amp;lt; &amp;#34;ID&amp;#34; &amp;lt;&amp;lt; &amp;#34;\tname&amp;#34; &amp;lt;&amp;lt; &amp;#34;\tpassword&amp;#34;;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">while&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">()){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">query&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="n">toInt&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">query&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">query&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;-----------------------------------------&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">qDebug&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">query&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">lastQuery&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>结果：&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/aHR0cHM6Ly93d3cueWVyYWluLmNuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzAyL0RlZXBpblNjcmVlbnNob3RfZ25vbWUtdGVybWluYWwtc2VydmVyXzIwMjAwMjA5MTgyODQyLnBuZw.png"
+width="738"
+height="462"
+srcset="https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hu372a245b8471b1d5a08ba814bd772a48_41508_a827882627e3ba83c324cb0e23e9f184.png 480w, https://c-poet.github.io/post/framework/qt/qt-build-mysql-driver/_hu372a245b8471b1d5a08ba814bd772a48_41508_540b8fb323bfec6073c0e54707a6d6f0.png 1024w"
+loading="lazy"
+alt="qtmysql测试结果"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="383px"
+>&lt;/p>
+&lt;h2 id="结语">结语
+&lt;/h2>&lt;p>如果vim或者没有合适的编辑器的话，可以直接使用QT Create打开.pro项目文件，然后右键编译需要编译的项目即可。&lt;/p></description></item></channel></rss>

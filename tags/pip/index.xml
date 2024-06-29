@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pip on CPoet</title><link>https://c-poet.github.io/tags/pip/</link><description>Recent content in Pip on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Fri, 16 Oct 2020 22:14:59 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/tags/pip/index.xml" rel="self" type="application/rss+xml"/><item><title>pip安装mysqliclient报错 fatal error C1083: 无法打开包括文件: “mysql.h”: No such file or directory</title><link>https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/</link><pubDate>Fri, 16 Oct 2020 22:14:59 +0800</pubDate><guid>https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/</guid><description>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626.png" alt="Featured image of post pip安装mysqliclient报错 fatal error C1083: 无法打开包括文件: “mysql.h”: No such file or directory" />&lt;h1 id="pip安装mysqliclient报错--fatal-error-c1083-无法打开包括文件-mysqlh-no-such-file-or-directory">pip安装mysqliclient报错 fatal error C1083: 无法打开包括文件: “mysql.h”: No such file or directory
+&lt;/h1>&lt;blockquote>
+&lt;p>出现这个错误的原因是本地没有配置&lt;code>mysql-connector-c&lt;/code>的path，也就是说mysqlclient依赖的头文件是lib库没有找到。&lt;br>
+&lt;strong>注意：我本地安装的是visual studio 2019&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016103017477.png"
+width="1841"
+height="319"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016103017477_hue5c1165ecfa97fa9f09daac7d6229d7f_204820_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016103017477_hue5c1165ecfa97fa9f09daac7d6229d7f_204820_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="577"
+data-flex-basis="1385px"
+>&lt;/p>
+&lt;ol>
+&lt;li>下载mysql-connector的c语言api&lt;/li>
+&lt;/ol>
+&lt;p>下载地址：&lt;a class="link" href="https://downloads.mysql.com/archives/c-c/" target="_blank" rel="noopener"
+>https://downloads.mysql.com/archives/c-c/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/2020101610341119.png"
+width="1525"
+height="621"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/2020101610341119_hu67b5fefbc799ff6cd9a5d7e1e48a92a5_119493_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/2020101610341119_hu67b5fefbc799ff6cd9a5d7e1e48a92a5_119493_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="245"
+data-flex-basis="589px"
+>&lt;/p>
+&lt;p>我下载的是&lt;code>Windows (x86, 64-bit), ZIP Archive&lt;/code>版，如果下载&lt;code>MSI Installer&lt;/code>安装版，可以直接安装以省去下面的步骤。&lt;/p>
+&lt;ol start="2">
+&lt;li>解压缩后把&lt;code>include&lt;/code>的所有头文件复制到&lt;code>Visual studio&lt;/code>的MSVC编译器的include中&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104029567.png"
+width="1767"
+height="948"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104029567_hub134f9870a06c655d04185cc91aefe31_386897_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104029567_hub134f9870a06c655d04185cc91aefe31_386897_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;ol start="3">
+&lt;li>把&lt;code>mysqlclient.lib&lt;/code>更名为&lt;code>mariadbclient.lib&lt;/code>，然后把mariadbclient.lib复制到MSVC的lib中（由于我的是64bit，因此我放在x64中）&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>需要注意自己的路径&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104500490.png"
+width="1725"
+height="915"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104500490_hu7717fc05c2ff5ea4760c8008de8caa1b_255808_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104500490_hu7717fc05c2ff5ea4760c8008de8caa1b_255808_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="188"
+data-flex-basis="452px"
+>&lt;/p>
+&lt;ol start="4">
+&lt;li>安装&lt;code>mysqlclient&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">pip install -U mysqlclient
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626.png"
+width="1786"
+height="281"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626_hu160ed6e0cc4b750f21255d0c9bce01f9_96267_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626_hu160ed6e0cc4b750f21255d0c9bce01f9_96267_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="635"
+data-flex-basis="1525px"
+>&lt;/p>
+&lt;p>&lt;strong>Successfully!!!!&lt;/strong>&lt;/p></description></item></channel></rss>

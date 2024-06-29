@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on CPoet</title><link>https://c-poet.github.io/tags/python/</link><description>Recent content in Python on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Fri, 16 Oct 2020 22:14:59 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>pip安装mysqliclient报错 fatal error C1083: 无法打开包括文件: “mysql.h”: No such file or directory</title><link>https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/</link><pubDate>Fri, 16 Oct 2020 22:14:59 +0800</pubDate><guid>https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/</guid><description>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626.png" alt="Featured image of post pip安装mysqliclient报错 fatal error C1083: 无法打开包括文件: “mysql.h”: No such file or directory" />&lt;h1 id="pip安装mysqliclient报错--fatal-error-c1083-无法打开包括文件-mysqlh-no-such-file-or-directory">pip安装mysqliclient报错 fatal error C1083: 无法打开包括文件: “mysql.h”: No such file or directory
+&lt;/h1>&lt;blockquote>
+&lt;p>出现这个错误的原因是本地没有配置&lt;code>mysql-connector-c&lt;/code>的path，也就是说mysqlclient依赖的头文件是lib库没有找到。&lt;br>
+&lt;strong>注意：我本地安装的是visual studio 2019&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016103017477.png"
+width="1841"
+height="319"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016103017477_hue5c1165ecfa97fa9f09daac7d6229d7f_204820_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016103017477_hue5c1165ecfa97fa9f09daac7d6229d7f_204820_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="577"
+data-flex-basis="1385px"
+>&lt;/p>
+&lt;ol>
+&lt;li>下载mysql-connector的c语言api&lt;/li>
+&lt;/ol>
+&lt;p>下载地址：&lt;a class="link" href="https://downloads.mysql.com/archives/c-c/" target="_blank" rel="noopener"
+>https://downloads.mysql.com/archives/c-c/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/2020101610341119.png"
+width="1525"
+height="621"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/2020101610341119_hu67b5fefbc799ff6cd9a5d7e1e48a92a5_119493_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/2020101610341119_hu67b5fefbc799ff6cd9a5d7e1e48a92a5_119493_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="245"
+data-flex-basis="589px"
+>&lt;/p>
+&lt;p>我下载的是&lt;code>Windows (x86, 64-bit), ZIP Archive&lt;/code>版，如果下载&lt;code>MSI Installer&lt;/code>安装版，可以直接安装以省去下面的步骤。&lt;/p>
+&lt;ol start="2">
+&lt;li>解压缩后把&lt;code>include&lt;/code>的所有头文件复制到&lt;code>Visual studio&lt;/code>的MSVC编译器的include中&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104029567.png"
+width="1767"
+height="948"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104029567_hub134f9870a06c655d04185cc91aefe31_386897_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104029567_hub134f9870a06c655d04185cc91aefe31_386897_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;ol start="3">
+&lt;li>把&lt;code>mysqlclient.lib&lt;/code>更名为&lt;code>mariadbclient.lib&lt;/code>，然后把mariadbclient.lib复制到MSVC的lib中（由于我的是64bit，因此我放在x64中）&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>需要注意自己的路径&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104500490.png"
+width="1725"
+height="915"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104500490_hu7717fc05c2ff5ea4760c8008de8caa1b_255808_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104500490_hu7717fc05c2ff5ea4760c8008de8caa1b_255808_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="188"
+data-flex-basis="452px"
+>&lt;/p>
+&lt;ol start="4">
+&lt;li>安装&lt;code>mysqlclient&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">pip install -U mysqlclient
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626.png"
+width="1786"
+height="281"
+srcset="https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626_hu160ed6e0cc4b750f21255d0c9bce01f9_96267_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/pip-install-mysqliclient-c1083/20201016104707626_hu160ed6e0cc4b750f21255d0c9bce01f9_96267_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="635"
+data-flex-basis="1525px"
+>&lt;/p>
+&lt;p>&lt;strong>Successfully!!!!&lt;/strong>&lt;/p></description></item><item><title>Python使用requests发起请求体格式为multipart/form-data的请求，解决MISSING_ARGUMENTS</title><link>https://c-poet.github.io/post/coding/python/requests-missing-arguments/</link><pubDate>Thu, 15 Oct 2020 22:25:18 +0800</pubDate><guid>https://c-poet.github.io/post/coding/python/requests-missing-arguments/</guid><description>&lt;img src="https://c-poet.github.io/post/coding/python/requests-missing-arguments/20201015153442930.png" alt="Featured image of post Python使用requests发起请求体格式为multipart/form-data的请求，解决MISSING_ARGUMENTS" />&lt;h2 id="python使用requests发起请求体格式为multipartform-data的请求">Python使用requests发起请求体格式为multipart/form-data的请求
+&lt;/h2>&lt;p>直接使用request可能遇见后端拿不到参数的情况，我遇见的错误为&lt;code>error_message': 'MISSING_ARGUMENTS: api_key&lt;/code>。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/coding/python/requests-missing-arguments/20201015153442930.png"
+width="1837"
+height="73"
+srcset="https://c-poet.github.io/post/coding/python/requests-missing-arguments/20201015153442930_hucf1fc142931910aacd7b79374a62957b_30578_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/coding/python/requests-missing-arguments/20201015153442930_hucf1fc142931910aacd7b79374a62957b_30578_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="2516"
+data-flex-basis="6039px"
+>&lt;/p>
+&lt;p>解决方案是使用&lt;code>requests_toolbelt&lt;/code>先处理数据格式，在使用&lt;code>requests&lt;/code>进行请求。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">requests&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">req&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">requests_toolbelt.multipart.encoder&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">MultipartEncoder&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">inc.config&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">conf&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">base64&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">io&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">img_file&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">io&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;../resource/img2.jpg&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;rb&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">img_base64&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">base64&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">encodebytes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img_file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">read&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 请求数据&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">req_data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;api_key&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">conf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">API_KEY&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;api_secret&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">conf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">API_SECRET&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;image_base64&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">img_base64&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;return_attributes&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;age,gender&amp;#39;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 这里是重点&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">multipart&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MultipartEncoder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req_data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">headers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">multipart&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">content_type&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">post&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">conf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">faceApi&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DETECT_API&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">req_data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">headers&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">headers&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">img_file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
