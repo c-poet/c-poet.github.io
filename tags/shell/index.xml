@@ -1,4 +1,178 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Shell on CPoet</title><link>https://c-poet.github.io/tags/shell/</link><description>Recent content in Shell on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Sun, 15 Nov 2020 21:29:13 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>使用shell编写“学生成绩管理系统“，按照要求完成相应的功能。</title><link>https://c-poet.github.io/post/coding/shell/student-score-manage/</link><pubDate>Sun, 15 Nov 2020 21:29:13 +0800</pubDate><guid>https://c-poet.github.io/post/coding/shell/student-score-manage/</guid><description>&lt;img src="https://c-poet.github.io/post/coding/shell/student-score-manage/20201115194746955.png" alt="Featured image of post 使用shell编写“学生成绩管理系统“，按照要求完成相应的功能。" />&lt;h2 id="功能要求">功能要求
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Shell on CPoet</title><link>https://c-poet.github.io/tags/shell/</link><description>Recent content in Shell on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Wed, 17 Apr 2024 08:47:29 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux恢复正在运行进程的执行文件</title><link>https://c-poet.github.io/post/linux/linux-recovery-running-file/</link><pubDate>Wed, 17 Apr 2024 08:47:29 +0800</pubDate><guid>https://c-poet.github.io/post/linux/linux-recovery-running-file/</guid><description>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir.png" alt="Featured image of post Linux恢复正在运行进程的执行文件" />&lt;blockquote>
+&lt;p>最近测试环境上的JAR包和配置文件被误删除了，导致系统不能正常访问。由于是在内网环境，导致删除恢复软件不能被正常安装，因此只能临时恢复正在执行的JAR包，保证系统能正常访问。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="操作步骤">操作步骤
+&lt;/h2>&lt;h3 id="环境准备">环境准备
+&lt;/h3>&lt;ol>
+&lt;li>启用jar应用&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">java -jar client-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/start-application.png"
+width="1980"
+height="566"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/start-application_hua0baf1f17ae0c62f25f0f88877914a5c_144879_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/start-application_hua0baf1f17ae0c62f25f0f88877914a5c_144879_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="启用应用程序"
+class="gallery-image"
+data-flex-grow="349"
+data-flex-basis="839px"
+>&lt;/p>
+&lt;ol start="2">
+&lt;li>删除jar包&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">rm -rf client-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="恢复文件">恢复文件
+&lt;/h3>&lt;ol>
+&lt;li>查询进程号&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">ps aux&lt;span class="p">|&lt;/span>grep java&lt;span class="p">|&lt;/span>grep client
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-pid.png"
+width="1970"
+height="205"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-pid_hua33c59d401a6b76abbc8a2589b9501c1_78018_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/query-pid_hua33c59d401a6b76abbc8a2589b9501c1_78018_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="查询进程号"
+class="gallery-image"
+data-flex-grow="960"
+data-flex-basis="2306px"
+>&lt;/p>
+&lt;ol start="2">
+&lt;li>进入进程目录&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># cd /proc/进程号/fd&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /proc/84885/fd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看文件信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ls -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir.png"
+width="1514"
+height="745"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir_hu8289273e5865ee1a9c9c217e668bb68d_153946_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/ls-process-dir_hu8289273e5865ee1a9c9c217e668bb68d_153946_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ls -l"
+class="gallery-image"
+data-flex-grow="203"
+data-flex-basis="487px"
+>&lt;/p>
+&lt;ol start="3">
+&lt;li>恢复执行文件&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 5是删除文件的映射文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cat &lt;span class="m">5&lt;/span> &amp;gt; /root/demo/client-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看恢复结果&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /root/demo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ls -lh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-recovery-result.png"
+width="1272"
+height="150"
+srcset="https://c-poet.github.io/post/linux/linux-recovery-running-file/query-recovery-result_hu15827f6789364af46526fd4810188661_25300_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/linux/linux-recovery-running-file/query-recovery-result_hu15827f6789364af46526fd4810188661_25300_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="恢复结果"
+class="gallery-image"
+data-flex-grow="848"
+data-flex-basis="2035px"
+>&lt;/p>
+&lt;ol start="4">
+&lt;li>查看结果&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="sheel脚本批量恢复">Sheel脚本（批量恢复）
+&lt;/h2>&lt;blockquote>
+&lt;p>由于环境涉及的应用较多，我编写了恢复shell脚本，可以恢复整个目录中的执行文件。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> pid in &lt;span class="k">$(&lt;/span>ps aux &lt;span class="p">|&lt;/span> grep java &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{ print $2 }&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Try to recover the files of &lt;/span>&lt;span class="nv">$pid&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> file in &lt;span class="k">$(&lt;/span>ls -l /proc/&lt;span class="nv">$pid&lt;/span>/fd &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{print $9}&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">symlink_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>ls -l /proc/&lt;span class="nv">$pid&lt;/span>/fd/&lt;span class="nv">$file&lt;/span> &lt;span class="p">|&lt;/span> awk &lt;span class="s1">&amp;#39;{print $11}&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># 判断是否满足恢复的条件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> &lt;span class="nv">$symlink_dir&lt;/span> &lt;span class="o">=&lt;/span>~ ^/data/soft/.*$ &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> ! -d &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>dirname symlink_dir&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mkdir -p &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>dirname symlink_dir&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> ! -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cat &lt;span class="s2">&amp;#34;/proc/&lt;/span>&lt;span class="nv">$pid&lt;/span>&lt;span class="s2">/fd/&lt;/span>&lt;span class="nv">$file&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &amp;gt; &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Copied &lt;/span>&lt;span class="nv">$file&lt;/span>&lt;span class="s2"> to &lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$file&lt;/span>&lt;span class="s2"> already exists in &lt;/span>&lt;span class="nv">$symlink_dir&lt;/span>&lt;span class="s2">. Skipping...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>使用shell编写“学生成绩管理系统“，按照要求完成相应的功能。</title><link>https://c-poet.github.io/post/coding/shell/student-score-manage/</link><pubDate>Sun, 15 Nov 2020 21:29:13 +0800</pubDate><guid>https://c-poet.github.io/post/coding/shell/student-score-manage/</guid><description>&lt;img src="https://c-poet.github.io/post/coding/shell/student-score-manage/20201115194746955.png" alt="Featured image of post 使用shell编写“学生成绩管理系统“，按照要求完成相应的功能。" />&lt;h2 id="功能要求">功能要求
 &lt;/h2>&lt;ul>
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> 当输入student.sh时，输出文件的全部内容&lt;/li>
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> 当输入student.sh –h 5时，输出文件的前5条记录;当输入student.sh -t 5时，输出文件的最后5条记录;&lt;/li>
