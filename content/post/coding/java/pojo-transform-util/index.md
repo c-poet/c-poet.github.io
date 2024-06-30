@@ -2,7 +2,7 @@
 draft = false
 author = "CPoet"
 title = "优雅的Pojo转换类封装，基于BeanUtils的链式封装（Transformer类）"
-date = " 2022-01-08T21:01:24+08:00"
+date = "2022-01-08T21:01:24+08:00"
 description = ""
 tags = ["Java", "Spring"]
 categories = [
