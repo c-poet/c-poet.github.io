@@ -3,8 +3,8 @@ draft = false
 author = "CPoet"
 title = "Linux恢复正在运行进程的执行文件"
 date = "2024-04-17T08:47:29+08:00"
-description = "恢复Linux中删除的文件，通过Python脚本批量还原。"
-tags = ["Linux", "Java"]
+description = "恢复Linux中删除的文件，通过Shell脚本批量还原。"
+tags = ["Linux", "Java", "Shell"]
 categories = [
     "linux",
 ]
