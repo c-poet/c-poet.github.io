@@ -4,7 +4,7 @@ author = "CPoet"
 title = "Spring启动时，将SpringContext设置到Util中（SpringContextUtil）"
 date = "2024-07-01T18:31:50+08:00"
 description = "在Spring应用开发中，为简化代码或者在静态方法中获取Spring应用的上下文，需要把SpringContext设置到类属性上。"
-tags = []
+tags = ["Spring", "Java"]
 categories = [
     "framework/spring",
 ]
