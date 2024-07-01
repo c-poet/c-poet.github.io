@@ -42,7 +42,7 @@ params:
 
     sidebar:
         emoji: 🧑‍💻
-        subtitle: 心中若无梦，又可以致远。
+        subtitle: 心中若无梦，又何以致远。
         avatar:
             enabled: true
             local: true
