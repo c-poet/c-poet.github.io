@@ -37,6 +37,12 @@ void main(int argc, char *argv[]) {
             <td><b>邮箱地址：</b></td>
             <td colspan="5"><a href="mailto:llzero54@foxmail.com">llzero54@foxmail.com</a></td>
         </tr>
+        <tr>
+            <td><b>就职企业：</b></td>
+            <td colspan="3">北京中科江南信息技术股份有限公司</td>
+            <td><b>职位：</b></td>
+            <td>码农</td>
+        </tr>
     </tbody>
 </table>
 
