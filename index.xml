@@ -204,6 +204,12 @@ data-flex-basis="421px"
 &lt;td>&lt;b>邮箱地址：&lt;/b>&lt;/td>
 &lt;td colspan="5">&lt;a href="mailto:llzero54@foxmail.com">llzero54@foxmail.com&lt;/a>&lt;/td>
 &lt;/tr>
+&lt;tr>
+&lt;td>&lt;b>就职企业：&lt;/b>&lt;/td>
+&lt;td colspan="3">北京中科江南信息技术股份有限公司&lt;/td>
+&lt;td>&lt;b>职位：&lt;/b>&lt;/td>
+&lt;td>码农&lt;/td>
+&lt;/tr>
 &lt;/tbody>
 &lt;/table>
 &lt;h2 id="-照片墙">💘 照片墙
