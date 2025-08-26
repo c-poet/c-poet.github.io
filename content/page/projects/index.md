@@ -8,6 +8,10 @@ menu:
         params: 
             icon: project
 links:
+  - title: PatchAssistant2J
+    description: Java补丁助手，降低增量补丁包替换的繁琐性，提供自动匹配、一键替换和反编译等功能。
+    website: /categories/projects/patch-assistant-to-java
+
   - title: poi-tl-ext
     description: poi-tl插件扩展，提供一个个性化、定制化的功能。（PS：在某政府人员控管系统的导出功能实现的套打插件）
     website: https://github.com/c-poet/poi-tl-ext
