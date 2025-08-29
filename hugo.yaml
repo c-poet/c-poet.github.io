@@ -42,7 +42,7 @@ params:
 
     sidebar:
         emoji: 🧑‍💻
-        subtitle: 地域会带来歧视。
+        subtitle: 地域限制了一切！
         avatar:
             enabled: true
             local: true
