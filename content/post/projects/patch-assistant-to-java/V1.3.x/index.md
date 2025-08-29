@@ -261,4 +261,4 @@ categories = [
 
 ## 开发计划
 
-[PatchAssistant2J 开发计划](/post/projects/patch-assistant-to-java/plan)
+[PatchAssistant2J 开发计划](https://www.cpoet.cn/post/projects/patch-assistant-to-java/plan)
