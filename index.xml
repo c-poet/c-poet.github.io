@@ -14,6 +14,7 @@
 &lt;h4 id="v131">V1.3.1
 &lt;/h4>&lt;ol>
 &lt;li>解决右键菜单在某些情况下混乱的问题 - 未开始&lt;/li>
+&lt;li>支持直接编辑文本文件（适用于简单修改） - 未开始&lt;/li>
 &lt;/ol>
 &lt;h4 id="v130">V1.3.0
 &lt;/h4>&lt;ol>
@@ -577,7 +578,8 @@ data-flex-basis="293px"
 &lt;/table>
 &lt;h2 id="特别鸣谢">特别鸣谢
 &lt;/h2>&lt;h2 id="开发计划">开发计划
-&lt;/h2>&lt;p>&lt;a class="link" href="https://c-poet.github.io/post/projects/patch-assistant-to-java/plan" >PatchAssistant2J 开发计划&lt;/a>&lt;/p></description></item><item><title>Spring启动时，将SpringContext设置到Util中（SpringContextUtil）</title><link>https://c-poet.github.io/post/framework/spring/spring-context-util/</link><pubDate>Mon, 01 Jul 2024 18:31:50 +0800</pubDate><guid>https://c-poet.github.io/post/framework/spring/spring-context-util/</guid><description>&lt;h2 id="场景">场景
+&lt;/h2>&lt;p>&lt;a class="link" href="https://www.cpoet.cn/post/projects/patch-assistant-to-java/plan" target="_blank" rel="noopener"
+>PatchAssistant2J 开发计划&lt;/a>&lt;/p></description></item><item><title>Spring启动时，将SpringContext设置到Util中（SpringContextUtil）</title><link>https://c-poet.github.io/post/framework/spring/spring-context-util/</link><pubDate>Mon, 01 Jul 2024 18:31:50 +0800</pubDate><guid>https://c-poet.github.io/post/framework/spring/spring-context-util/</guid><description>&lt;h2 id="场景">场景
 &lt;/h2>&lt;p>在Spring应用开发中，为简化代码或者在静态方法中获取Spring应用的上下文，需要把SpringContext设置到类属性上。经过对源码的分析和实践，使用Spring的事件监听器监听&lt;code>ApplicationPreparedEvent&lt;/code>事件是最佳的方式。&lt;/p>
 &lt;p>通过&lt;code>ApplicationPreparedEvent&lt;/code>类的注释可知，该事件是在ApplicationContext创建完成后（未刷新前）发布的，也就是说我们收到该事件通知的时间比任何业务Bean初始化的时间都早。
 &lt;img src="https://c-poet.github.io/post/framework/spring/spring-context-util/application-prepared-event.png"
