@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>助手 on CPoet</title><link>https://c-poet.github.io/tags/%E5%8A%A9%E6%89%8B/</link><description>Recent content in 助手 on CPoet</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>BY CPoet</copyright><lastBuildDate>Tue, 26 Aug 2025 23:00:30 +0800</lastBuildDate><atom:link href="https://c-poet.github.io/tags/%E5%8A%A9%E6%89%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>PatchAssistant2J 开发计划</title><link>https://c-poet.github.io/post/projects/patch-assistant-to-java/plan/</link><pubDate>Tue, 26 Aug 2025 23:00:30 +0800</pubDate><guid>https://c-poet.github.io/post/projects/patch-assistant-to-java/plan/</guid><description>&lt;h2 id="changelog">Changelog
+&lt;/h2>&lt;h3 id="v14x">V1.4.x
+&lt;/h3>&lt;h4 id="v140">V1.4.0
+&lt;/h4>&lt;ol>
+&lt;li>UI重构（实现更现代化的UI风格） - 未开始&lt;/li>
+&lt;li>增加MacOS、Linux启动器 - 开发中&lt;/li>
+&lt;/ol>
+&lt;h3 id="v13x">V1.3.x
+&lt;/h3>&lt;p>&lt;a class="link" href="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x" >V1.3.x 使用文档&lt;/a>&lt;/p>
+&lt;h4 id="v132">V1.3.2
+&lt;/h4>&lt;ol>
+&lt;li>降价内存占用率（目前解析应用树和补丁包JVM内存未合理利用和释放，导致内存占用率一直居高不下）- 未开始&lt;/li>
+&lt;/ol>
+&lt;h4 id="v131">V1.3.1
+&lt;/h4>&lt;ol>
+&lt;li>解决右键菜单在某些情况下混乱的问题 - 未开始&lt;/li>
+&lt;/ol>
+&lt;h4 id="v130">V1.3.0
+&lt;/h4>&lt;ol>
+&lt;li>在原有ZIP包的基础上新增对RAR压缩包的支持（由于RAR5闭源，需要调用本地unrar工具）&lt;/li>
+&lt;li>支持右键新建目录和重命名文件&lt;/li>
+&lt;li>左右树节点文件数据采取懒加载方式（对于解压缩的文件转缓存文件）以降低内存占用率&lt;/li>
+&lt;li>写入补丁时先写入临时文件，避免失败的情况下导致文件损坏的问题&lt;/li>
+&lt;li>新增右键查看某个根节点的绑定信息（可以保存程序生成的信息以供下次直接使用）&lt;/li>
+&lt;li>去掉路径合并功能（方便目录下只有一个文件情况下对目录进行编辑）&lt;/li>
+&lt;li>支持左树、右树隐藏（应用于反编译仅查看内容的场景）&lt;/li>
+&lt;li>文本内容查看支持选择编码（应用于乱码的情况）&lt;/li>
+&lt;li>引入多线程支持（解析应用包和补丁包、路径匹配和写入应用包等）&lt;/li>
+&lt;li>快速搜索功能（直接在应用树或者补丁树输入关键字）&lt;/li>
+&lt;/ol>
+&lt;h3 id="v12x">V1.2.x
+&lt;/h3>&lt;h4 id="v122">V1.2.2
+&lt;/h4>&lt;ol>
+&lt;li>节点先按类型（目录、文件）排序，再按文件名排序&lt;/li>
+&lt;li>支持多根节点标记，解决一次性替换多个补丁文件的需求&lt;/li>
+&lt;li>支持通过说明文件递归删除文件和匹配文件&lt;/li>
+&lt;/ol>
+&lt;h4 id="v120">V1.2.0
+&lt;/h4>&lt;ol>
+&lt;li>移出补丁文件勾选生效功能，新增取消关联功能（针对关联错误或无需替换的情况）&lt;/li>
+&lt;li>完成所有功能的中/英文切换（切换中英需重启生效）&lt;/li>
+&lt;li>新增重复打补丁文件提醒&lt;/li>
+&lt;li>新增补丁操作人名称配置（默认取当前计算机用户名）&lt;/li>
+&lt;/ol>
+&lt;h3 id="v11x">V1.1.x
+&lt;/h3>&lt;h4 id="v110">V1.1.0
+&lt;/h4>&lt;ol>
+&lt;li>应用树和补丁树支持多选功能，多选后支持多文件拖动（应用内仅支持补丁树到应用树）&lt;/li>
+&lt;li>支持拖动目录（拖动单个目录时自动和目标目录合并，拖动多个目录或者文件时直接增加到目标目录下）&lt;/li>
+&lt;li>支持写入补丁签名信息（包括补丁编码、名称、哈希值以及打补丁用户的名称、原应用的大小、哈希值等信息）&lt;/li>
+&lt;li>新增暗夜模式（即刻开启夜猫子升级模式）&lt;/li>
+&lt;li>新增自动路径寻址匹配和根节点下名称匹配功能（解决没有说明文件的情况下，也能自动匹配大多数的补丁文件）&lt;/li>
+&lt;li>完善补丁操作数量统计功能，标记删除功能直接替换为手动删除（部分场景下需要删除文件然后从补丁包中拖动新增）&lt;/li>
+&lt;/ol>
+&lt;h4 id="v101">V1.0.1
+&lt;/h4>&lt;ol>
+&lt;li>新增文件搜索功能（支持路径匹配搜索和名称搜索）&lt;/li>
+&lt;li>新增代码反编译和文件内容查看功能&lt;/li>
+&lt;li>新增java-diff-utils文本内容比较功能（快速定位补丁修改的内容）&lt;/li>
+&lt;li>新增进度信息展示功能（生成大型包的时候也能时刻关注生产的情况）&lt;/li>
+&lt;/ol>
+&lt;h4 id="v100">V1.0.0
+&lt;/h4>&lt;ol>
+&lt;li>支持I18N功能（英文水平有限，暂时未翻译）&lt;/li>
+&lt;li>支持根据ReadMe文件自动匹配补丁包并替换&lt;/li>
+&lt;/ol></description></item><item><title>PatchAssistant2J 1.3.x 说明文档</title><link>https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/</link><pubDate>Tue, 26 Aug 2025 20:43:30 +0800</pubDate><guid>https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/</guid><description>&lt;h2 id="主界面">主界面
+&lt;/h2>&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/001.png"
+width="2559"
+height="1494"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/001_huf382b36a394bb65132446ff28ade76d8_209864_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/001_huf382b36a394bb65132446ff28ade76d8_209864_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="程序主界面"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="411px"
+>&lt;/p>
+&lt;h3 id="分区导航">分区导航
+&lt;/h3>&lt;ul>
+&lt;li>&lt;a class="link" href="#%e9%80%89%e9%a1%b9%e6%a0%8f" >区域1 选项栏&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="#%e5%ba%94%e7%94%a8%e6%a0%91" >区域2 应用树&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="#%e8%a1%a5%e4%b8%81%e6%a0%91" >区域3 补丁树&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="#%e8%a1%a5%e4%b8%81%e4%bf%a1%e6%81%af-1" >区域4 补丁信息&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="#%e7%8a%b6%e6%80%81%e6%a0%8f" >区域5 状态栏&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="选项栏">选项栏
+&lt;/h2>&lt;p>左侧提供&lt;strong>补丁信息&lt;/strong>、&lt;strong>选中联动&lt;/strong>、&lt;strong>文件详情&lt;/strong>等常用选项的快捷操作，右侧提供&lt;strong>搜索&lt;/strong>、&lt;strong>配置&lt;/strong>、&lt;strong>关于&lt;/strong>等功能的打开按钮。&lt;/p>
+&lt;h3 id="补丁信息">补丁信息
+&lt;/h3>&lt;p>控制主界面下方的&lt;strong>补丁信息窗体&lt;/strong>的显示。&lt;/p>
+&lt;ul>
+&lt;li>勾选：显示补丁信息窗体&lt;/li>
+&lt;li>未勾选：隐藏补丁信息窗体。&lt;/li>
+&lt;/ul>
+&lt;h3 id="选中联动">选中联动
+&lt;/h3>&lt;p>在应用文件和补丁文件已经匹配（新增、修改）的情况，控制选中应用文件或者补丁文件时，已经关联的匹配文件自动选中。&lt;/p>
+&lt;ul>
+&lt;li>勾选：自动选中已经关联匹配的文件&lt;/li>
+&lt;li>未勾选：禁用自动选中已经关联匹配的文件&lt;/li>
+&lt;/ul>
+&lt;h3 id="文件详情">文件详情
+&lt;/h3>&lt;p>控制应用树和补丁树是否显示文件的详情信息（修改时间、文件大小、文件Hash值等）。&lt;/p>
+&lt;ul>
+&lt;li>勾选：在应用树和补丁树中显示文件详情&lt;/li>
+&lt;li>未勾选：在应用树和补丁树中不显示文件详情&lt;/li>
+&lt;/ul>
+&lt;h3 id="仅看变动">仅看变动
+&lt;/h3>&lt;p>在应用文件和补丁文件已经匹配（新增、修改）的情况，应用树仅显示已经关联匹配的文件。在没有文件匹配的情况下，应用树显示无叶子节点的空树。&lt;/p>
+&lt;ul>
+&lt;li>勾选：应用树仅显示已经关联匹配的文件&lt;/li>
+&lt;li>未勾选：应用树显示所有的文件&lt;/li>
+&lt;/ul>
+&lt;h3 id="docker镜像">Docker镜像
+&lt;/h3>&lt;p>控制是否应用Docker镜像模式，应用Docker镜像模式的情况下，程序自动将生成的应用包上传到Docker服务器，按照Dockerfile模板生成Docker镜像、导出Docker镜像，并自动把导出的&lt;code>.tar&lt;/code>文件下载至指定目录（生成速度受Docker配置、计算机状态、网络等因素的影响）。&lt;/p>
+&lt;ul>
+&lt;li>勾选：保存Docker镜像（*.tar）&lt;/li>
+&lt;li>未勾选：保存应用包（*.jar）&lt;/li>
+&lt;/ul>
+&lt;h2 id="应用树">应用树
+&lt;/h2>&lt;p>按层级展示应用包中的内容，支持多层展开，即Jar包无限嵌套的情况。&lt;/p>
+&lt;h3 id="选择应用包">选择应用包
+&lt;/h3>&lt;p>点击“选择”按钮或者通过快捷键&lt;code>Ctrl + O&lt;/code>可以打开资源管理器选择应用包，仅支持&lt;code>*.jar&lt;/code>格式的Java应用包。也可以通过拖拽的方式将&lt;code>*.jar&lt;/code>包拖入应用树区域。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/002.png"
+width="1260"
+height="792"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/002_hue0698e3a3e5777c9a3b2f995a85e29c2_60611_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/002_hue0698e3a3e5777c9a3b2f995a85e29c2_60611_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="应用包选择界面"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="381px"
+>&lt;/p>
+&lt;h3 id="右键菜单">右键菜单
+&lt;/h3>&lt;p>当焦点在应用树时，通过单击鼠标右键打开操作菜单。&lt;/p>
+&lt;h4 id="创建目录">创建目录
+&lt;/h4>&lt;p>选中目录时显示“创建目录”菜单项，可以在当前选中的目录下面创建子目录，创建时可以直接对新增的目录名称进行编辑，按回车键确认。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/003.png"
+width="1265"
+height="412"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/003_hub995df773fed6425e55630062b618295_26381_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/003_hub995df773fed6425e55630062b618295_26381_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="新增目录示例"
+class="gallery-image"
+data-flex-grow="307"
+data-flex-basis="736px"
+>&lt;/p>
+&lt;h4 id="重新加载">重新加载
+&lt;/h4>&lt;p>选中根节点时显示“重新加载”菜单项，该操作可以重新读取应用文件并刷新应用树。当焦点在应用树时，也可以通过&lt;code>F5&lt;/code>快捷键或者&lt;code>Ctrl + R&lt;/code>快捷键重新加载应用树。&lt;/p>
+&lt;h4 id="重命名">重命名
+&lt;/h4>&lt;p>选中目录或者文件时显示“重命名”菜单项，该操作可以直接修改文件名称。当选中目录或者文件时，可以通过&lt;code>F2&lt;/code>快捷键进行重命名。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/004.png"
+width="1281"
+height="341"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/004_hu9023203722d7a7e4959489d0f7a7ee35_20227_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/004_hu9023203722d7a7e4959489d0f7a7ee35_20227_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="文件重命名"
+class="gallery-image"
+data-flex-grow="375"
+data-flex-basis="901px"
+>&lt;/p>
+&lt;h4 id="删除">删除
+&lt;/h4>&lt;p>选中未关联的文件或者目录时显示“删除”菜单项，该操作会直接将文件或者目录从应用树中移出。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/006.png"
+width="631"
+height="191"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/006_hu25da25ffcebb23a05dc78c6c1d317eb2_18136_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/006_hu25da25ffcebb23a05dc78c6c1d317eb2_18136_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="删除文件确认框"
+class="gallery-image"
+data-flex-grow="330"
+data-flex-basis="792px"
+>&lt;/p>
+&lt;h4 id="标记删除">标记删除
+&lt;/h4>&lt;p>选中未关联的文件或者目录时显示“标记删除”菜单项，该操作不会立即删除文件，而是将文件类型标记为删除状态，并且显示颜色置灰，在保存应用时才会排除该文件。对于通过补丁说明匹配删除的文件状态为标记删除状态。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/005.png"
+width="1105"
+height="110"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/005_huc123354b78173e00a3ea74fb75adfd7d_9169_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/005_huc123354b78173e00a3ea74fb75adfd7d_9169_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="标记删除的文件被置灰"
+class="gallery-image"
+data-flex-grow="1004"
+data-flex-basis="2410px"
+>&lt;/p>
+&lt;h4 id="保存文件">保存文件
+&lt;/h4>&lt;p>选中文件时显示“保存文件”菜单项，该操作可以将选中的文件保存到指定的位置，或者通过&lt;strong>拖拽&lt;/strong>的将文件拖到指定位置。&lt;/p>
+&lt;h4 id="保存源文件">保存源文件
+&lt;/h4>&lt;p>选中&lt;code>*.class&lt;/code>文件时显示“保存源文件”菜单项，该操作将直接反编译字节码文件并将反编译的结果保存到指定位置。&lt;/p>
+&lt;h4 id="资源管理器中查看">资源管理器中查看
+&lt;/h4>&lt;p>当选中的目录或者文件在磁盘中存在时显示“资源管理器中查看”菜单项，该操作将直接打开资源管理器并定位到选中的文件。应用树只有根节点在磁盘中有文件对应，其余节点均为压缩包中的文件，因此只有根节点会显示该菜单项。&lt;/p>
+&lt;h4 id="聚焦应用">聚焦应用
+&lt;/h4>&lt;p>“聚焦应用”菜单项会把补丁树区域隐藏，仅显示应用树区域。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/007.png"
+width="1567"
+height="798"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/007_hu2e7b3b2e6acd25b2743823025e9b4eaa_72656_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/007_hu2e7b3b2e6acd25b2743823025e9b4eaa_72656_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="聚焦应用"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+>&lt;/p>
+&lt;h2 id="补丁树">补丁树
+&lt;/h2>&lt;p>按层级展示补丁包或者补丁目录中的内容，支持无限嵌套补丁包（目前支持&lt;code>*.zip&lt;/code>和&lt;code>*.rar&lt;/code>两种压缩格式）。&lt;/p>
+&lt;h3 id="选择补丁包">选择补丁包
+&lt;/h3>&lt;p>点击“选择”按钮或者通过快捷键&lt;code>Ctrl + O&lt;/code>可以打开资源管理器选择补丁包，仅支持&lt;code>*.zip&lt;/code>和&lt;code>*.rar&lt;/code>格式的补丁包。也可以通过拖拽的方式将&lt;code>*.zip&lt;/code>或者&lt;code>*.rar&lt;/code>包拖入补丁树区域。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/009.png"
+width="1260"
+height="792"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/009_hu29808cc2fd549489bf86fd9875e943a6_54729_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/009_hu29808cc2fd549489bf86fd9875e943a6_54729_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="补丁包选择界面"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="381px"
+>&lt;/p>
+&lt;h3 id="选择补丁目录">选择补丁目录
+&lt;/h3>&lt;p>点击“目录”可以打开资源管理器选择补丁目录，也可以通过拖拽的方式将补丁文件所在目录拖入补丁树区域。&lt;/p>
+&lt;h3 id="右键菜单-1">右键菜单
+&lt;/h3>&lt;p>当焦点在补丁树时，通过单击鼠标右键打开操作菜单。&lt;/p>
+&lt;h4 id="重新加载-1">重新加载
+&lt;/h4>&lt;p>选中根节点时显示“重新加载”菜单项，可以重新读取补丁文件、补丁目录内容刷新补丁树。当焦点在补丁树时，也可以通过&lt;code>F5&lt;/code>快捷键或者&lt;code>Ctrl + R&lt;/code>快捷键重新加载补丁树。&lt;/p>
+&lt;p>当选中&lt;strong>标记根节点&lt;/strong>时显示“刷新信息”菜单项，支持重新读取标记根节点的补丁说明文件，刷新当前标记根节点的绑定信息。也可以通过&lt;code>F5&lt;/code>快捷键或者&lt;code>Ctrl + R&lt;/code>快捷键完成刷新。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/008.png"
+width="1563"
+height="751"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/008_hud70f13396deaa05086f6c5bcc18ab3db_62224_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/008_hud70f13396deaa05086f6c5bcc18ab3db_62224_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="刷新信息"
+class="gallery-image"
+data-flex-grow="208"
+data-flex-basis="499px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>注意：“重新加载”和“刷新信息”会根据当前节点所在根的类型（根、标记根）显示其中一个菜单项，快捷键亦然。&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="保存文件-1">保存文件
+&lt;/h4>&lt;p>参考：&lt;a class="link" href="#%e4%bf%9d%e5%ad%98%e6%96%87%e4%bb%b6" >应用树-保存文件&lt;/a>&lt;/p>
+&lt;h4 id="保存源文件-1">保存源文件
+&lt;/h4>&lt;p>参考：&lt;a class="link" href="#%e4%bf%9d%e5%ad%98%e6%ba%90%e6%96%87%e4%bb%b6" >应用树-保存源文件&lt;/a>&lt;/p>
+&lt;h4 id="查看签名">查看签名
+&lt;/h4>&lt;p>查看签名可以查看&lt;strong>根节点&lt;/strong>和&lt;strong>标记根节点&lt;/strong>的详细文件信息，包括补丁编码、补丁名称、完整Hash值等信息，可用于校验补丁文件完整性。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/012.png"
+width="1024"
+height="467"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/012_hub78ea095096fba02c534a60670a3e6f4_27300_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/012_hub78ea095096fba02c534a60670a3e6f4_27300_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="查看签名"
+class="gallery-image"
+data-flex-grow="219"
+data-flex-basis="526px"
+>&lt;/p>
+&lt;h4 id="查看绑定信息">查看绑定信息
+&lt;/h4>&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/013.png"
+width="1084"
+height="673"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/013_hu09a1e083ff72022a55882190b3c04565_30423_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/013_hu09a1e083ff72022a55882190b3c04565_30423_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="查看绑定信息"
+class="gallery-image"
+data-flex-grow="161"
+data-flex-basis="386px"
+>&lt;/p>
+&lt;h4 id="资源管理器中查看-1">资源管理器中查看
+&lt;/h4>&lt;h4 id="聚焦补丁">聚焦补丁
+&lt;/h4>&lt;p>“聚焦补丁”菜单项会把应用树区域隐藏，仅显示补丁树区划。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/010.png"
+width="1565"
+height="798"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/010_hu93e7c72e553f1aa809de6d4a9c3f20d8_52961_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/010_hu93e7c72e553f1aa809de6d4a9c3f20d8_52961_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="聚焦补丁"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="470px"
+>&lt;/p>
+&lt;h2 id="补丁信息-1">补丁信息
+&lt;/h2>&lt;h3 id="补丁说明文件readmetxt">补丁说明文件（README.txt）
+&lt;/h3>&lt;h2 id="状态栏">状态栏
+&lt;/h2>&lt;p>状态栏左边显示操作统计信息，右侧显示&lt;strong>保存&lt;/strong>按钮。&lt;/p>
+&lt;h3 id="统计信息">统计信息
+&lt;/h3>&lt;ul>
+&lt;li>新增-显示应用树新增的文件数量&lt;/li>
+&lt;li>修改-显示应用树更新的文件数量&lt;/li>
+&lt;li>删除-显示应用树手动删除的文件数量&lt;/li>
+&lt;li>标记删除-显示应用树根据说明文件匹配删除的文件数量和手动标记删除的文件数量之和&lt;/li>
+&lt;/ul>
+&lt;h3 id="保存按钮">保存按钮
+&lt;/h3>&lt;p>替换完补丁后需要点击右下角的&lt;strong>保存&lt;/strong>按钮保存操作结果，未保存操作结果不会同步到应用文件。&lt;/p>
+&lt;p>保存没有进行任何操作的应用包时，将会提示：
+&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/015.png"
+width="631"
+height="191"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/015_huacae4d7254e4929769306b90272d7ea1_15577_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/015_huacae4d7254e4929769306b90272d7ea1_15577_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="未更改提示"
+class="gallery-image"
+data-flex-grow="330"
+data-flex-basis="792px"
+>&lt;/p>
+&lt;p>如果应用包已经替换过相同的补丁包时，将会提示：
+&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/014.png"
+width="631"
+height="191"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/014_hu2ffb5f79811573922249b769dfa7fe95_16235_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/014_hu2ffb5f79811573922249b769dfa7fe95_16235_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="补丁包执行重复提示"
+class="gallery-image"
+data-flex-grow="330"
+data-flex-basis="792px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>注意：补丁包执行重复提示需要开启“写入补丁签名”功能，参考 &lt;a class="link" href="#%e8%a1%a5%e4%b8%81%e9%85%8d%e7%bd%ae" >补丁配置&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="文件查看">文件查看
+&lt;/h2>&lt;h3 id="普通文本">普通文本
+&lt;/h3>&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/017.png"
+width="1697"
+height="251"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/017_hue73fb5478bf8a74b21aab6a80310764c_16008_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/017_hue73fb5478bf8a74b21aab6a80310764c_16008_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="文本查看"
+class="gallery-image"
+data-flex-grow="676"
+data-flex-basis="1622px"
+>&lt;/p>
+&lt;h3 id="代码高亮">代码高亮
+&lt;/h3>&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/018.png"
+width="1705"
+height="967"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/018_hu7f75ecf9c7adfd79d9413ed2c6e2c7fa_89217_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/018_hu7f75ecf9c7adfd79d9413ed2c6e2c7fa_89217_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="代码高亮"
+class="gallery-image"
+data-flex-grow="176"
+data-flex-basis="423px"
+>&lt;/p>
+&lt;h3 id="反编译">反编译
+&lt;/h3>&lt;h3 id="文本字符集">文本字符集
+&lt;/h3>&lt;p>内容查看时，通过右键菜单要的字符编码，支持&lt;code>GBK&lt;/code>和&lt;code>UTF-8&lt;/code>字符集，满足绝大部分的情况。&lt;/p>
+&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/016.png"
+width="816"
+height="188"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/016_hu20a0fb6ed9cc99e6daae9f8297c2b10a_11310_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/016_hu20a0fb6ed9cc99e6daae9f8297c2b10a_11310_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="字符编码"
+class="gallery-image"
+data-flex-grow="434"
+data-flex-basis="1041px"
+>&lt;/p>
+&lt;h3 id="差异对比模式">差异（对比）模式
+&lt;/h3>&lt;p>差异（对比）模式的前提是应用文件和补丁文件已经匹配，可以通过右键菜单切换模式。
+&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/019.png"
+width="501"
+height="188"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/019_hu9a3d7fc4b813e3e7e5d568573539fb87_8619_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/019_hu9a3d7fc4b813e3e7e5d568573539fb87_8619_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="切换对比模式"
+class="gallery-image"
+data-flex-grow="266"
+data-flex-basis="639px"
+>&lt;/p>
+&lt;p>对比模式：呈左右两侧内容，左边是应用树文件内容，右边是补丁树文件内容
+&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/020.png"
+width="1705"
+height="967"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/020_hu0f17c5d87266cf688d82d64ec0fef7e5_65201_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/020_hu0f17c5d87266cf688d82d64ec0fef7e5_65201_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="对比模式"
+class="gallery-image"
+data-flex-grow="176"
+data-flex-basis="423px"
+>&lt;/p>
+&lt;p>差异模式：应用树文件内容和补丁树文件内容通过文本对比工具对比后合并显示
+&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/021.png"
+width="1705"
+height="967"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/021_hu66b55b5eacb6ec348831fd7c6b03f03b_58197_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/021_hu66b55b5eacb6ec348831fd7c6b03f03b_58197_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="差异模式"
+class="gallery-image"
+data-flex-grow="176"
+data-flex-basis="423px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>@@ -1,2 +1,1 @@&lt;/p>
+&lt;p>代表：从第一行开始删除两行内容，从第1行开始新增一行内容&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="其他文件">其他文件
+&lt;/h3>&lt;p>对于非文本文件或者程序未支持的文件类型，会调用系统默认程序打开。&lt;/p>
+&lt;h2 id="搜索">搜索
+&lt;/h2>&lt;h3 id="快速搜索">快速搜索
+&lt;/h3>&lt;h3 id="高级搜索弹窗">高级搜索（弹窗）
+&lt;/h3>&lt;h2 id="配置界面">配置（界面）
+&lt;/h2>&lt;p>&lt;img src="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/011.png"
+width="1084"
+height="887"
+srcset="https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/011_hu1d1a31ab138f55281340251e55db65fd_55116_480x0_resize_box_3.png 480w, https://c-poet.github.io/post/projects/patch-assistant-to-java/v1.3.x/images/011_hu1d1a31ab138f55281340251e55db65fd_55116_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="配置界面"
+class="gallery-image"
+data-flex-grow="122"
+data-flex-basis="293px"
+>&lt;/p>
+&lt;h3 id="常规配置">常规配置
+&lt;/h3>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">配置项&lt;/th>
+&lt;th style="text-align:center">默认值&lt;/th>
+&lt;th>配置说明&lt;/th>
+&lt;th style="text-align:center">生效时间&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">主题&lt;/td>
+&lt;td style="text-align:center">明亮主题&lt;/td>
+&lt;td>&lt;strong>明亮主题&lt;/strong>、&lt;strong>暗夜主题&lt;/strong>&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">语言&lt;/td>
+&lt;td style="text-align:center">English&lt;/td>
+&lt;td>简体中文、英文&lt;/td>
+&lt;td style="text-align:center">重启&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="搜索配置">搜索配置
+&lt;/h3>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">配置项&lt;/th>
+&lt;th style="text-align:center">默认值&lt;/th>
+&lt;th>配置说明&lt;/th>
+&lt;th style="text-align:center">生效时间&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">保存历史条数&lt;/td>
+&lt;td style="text-align:center">30&lt;/td>
+&lt;td>高级搜索保存搜索记录的条数&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="补丁配置">补丁配置
+&lt;/h3>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">配置项&lt;/th>
+&lt;th style="text-align:center">默认值&lt;/th>
+&lt;th>配置说明&lt;/th>
+&lt;th style="text-align:center">生效时间&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">用户名&lt;/td>
+&lt;td style="text-align:center">计算机登录用户名&lt;/td>
+&lt;td>写入补丁签名时优先使用该值&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">开启路径匹配&lt;/td>
+&lt;td style="text-align:center">是&lt;/td>
+&lt;td>自动按全路径匹配补丁文件&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">开启文件名匹配&lt;/td>
+&lt;td style="text-align:center">是&lt;/td>
+&lt;td>自动按文件名匹配补丁文件&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">说明文件&lt;/td>
+&lt;td style="text-align:center">README.txt&lt;/td>
+&lt;td>补丁说明文件名称&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">写入补丁签名&lt;/td>
+&lt;td style="text-align:center">是&lt;/td>
+&lt;td>保存应用包时将补丁签名写入&lt;code>META-INF/patch-up.sign&lt;/code>文件&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">UnRar路径&lt;/td>
+&lt;td style="text-align:center">C:\Program Files\WinRAR&lt;/td>
+&lt;td>Unrar程序的路径，用于解压rar5压缩包&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="docker配置">Docker配置
+&lt;/h3>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">配置项&lt;/th>
+&lt;th style="text-align:center">默认值&lt;/th>
+&lt;th>配置说明&lt;/th>
+&lt;th style="text-align:center">生效时间&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">本机&lt;/td>
+&lt;td style="text-align:center">是&lt;/td>
+&lt;td>调用本地docker命令生成tar镜像包&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">远程&lt;/td>
+&lt;td style="text-align:center">否&lt;/td>
+&lt;td>调用远程docker命令生成tar镜像包，需要配置远程信息&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">命令&lt;/td>
+&lt;td style="text-align:center">docker&lt;/td>
+&lt;td>docker命令（可填写全路径）&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">目录&lt;/td>
+&lt;td style="text-align:center">/opt/PatchAssistant2J&lt;/td>
+&lt;td>上传、导出文件的工作目录&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">地址&lt;/td>
+&lt;td style="text-align:center">-&lt;/td>
+&lt;td>远程docker服务器的地址和端口&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">用户&lt;/td>
+&lt;td style="text-align:center">-&lt;/td>
+&lt;td>远程docker服务器登录的用户名&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">密码&lt;/td>
+&lt;td style="text-align:center">-&lt;/td>
+&lt;td>远程docker服务器登录的密码&lt;/td>
+&lt;td style="text-align:center">保存&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="快捷键">快捷键
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">位置&lt;/th>
+&lt;th style="text-align:center">快捷键&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">应用树&lt;/td>
+&lt;td style="text-align:center">F5/Ctrl + R&lt;/td>
+&lt;td>重新加载应用包&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">应用树&lt;/td>
+&lt;td style="text-align:center">Ctrl + O&lt;/td>
+&lt;td>选择应用包&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">应用树&lt;/td>
+&lt;td style="text-align:center">F2&lt;/td>
+&lt;td>重命名文件&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="特别鸣谢">特别鸣谢
+&lt;/h2>&lt;h2 id="开发计划">开发计划
+&lt;/h2>&lt;p>&lt;a class="link" href="https://c-poet.github.io/post/projects/patch-assistant-to-java/plan" >PatchAssistant2J 开发计划&lt;/a>&lt;/p></description></item></channel></rss>
